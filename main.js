@@ -106,11 +106,44 @@ function startIntro() {
       .from('.global-glass-bg', { scale: 1.1, opacity: 0, duration: 2, ease: "power3.out" }, "-=0.5")
       .from('.hero-text-bg', { scale: 0.8, opacity: 0, duration: 2, ease: "power3.out" }, "-=1.5")
       .from('.header', { y: -50, opacity: 0, duration: 1 }, "-=1")
-      .from('.hero-content', { y: 50, opacity: 0, duration: 1.5, ease: "power3.out" }, "-=1")
+      .from('.hero-tiny-top', { y: 20, opacity: 0, duration: 1, ease: "power3.out" }, "-=1")
+      .to('.hero-title .word', { y: 0, opacity: 1, stagger: 0.2, duration: 1.5, ease: "power4.out" }, "-=0.8")
+      .from('.hero-divider', { height: 0, opacity: 0, duration: 1, ease: "power4.inOut" }, "-=1")
+      .from('.hero-subtitle', { y: 30, opacity: 0, duration: 1.5, ease: "power3.out" }, "-=0.8")
+      .from('.magnetic-btn', { scale: 0.8, opacity: 0, duration: 1, ease: "power4.out" }, "-=1")
       .from('.mouse-scroll-indicator', { opacity: 0, duration: 1 }, "-=0.5");
 }
 
 // 4. GSAP ScrollTrigger Animations
+
+// Magnetic Buttons Logic for 3D Professionalism
+const magneticBtns = document.querySelectorAll('.magnetic-btn');
+
+magneticBtns.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const h = rect.width / 2;
+        
+        const x = e.clientX - rect.left - h;
+        const y = e.clientY - rect.top - (rect.height / 2);
+
+        gsap.to(btn, {
+            x: x * 0.4,
+            y: y * 0.4,
+            duration: 0.5,
+            ease: "power3.out"
+        });
+    });
+
+    btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.7,
+            ease: "elastic.out(1, 0.3)"
+        });
+    });
+});
 
 // Hero bg parallax
 gsap.to(".hero-bg", {
