@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papai Studio</title>
+    <link rel="icon" type="image/png" href="./Data/6.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Oswald:wght@200;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <!-- Global Fixed Dynamic Glass Background -->
+    <div class="global-glass-bg">
+        <img src="./Data/hero_bengali.png" alt="Hero Glass Bg" class="bg-img">
+        <div class="glass-overlay"></div>
+    </div>
+
+    <!-- Cinematic Loader -->
+    <div class="loader">
+        <div class="loader-content">
+            <img src="./Data/6.png" alt="Papai Studio Logo" class="loader-logo">
+            <p class="loader-subtitle">Loading Experience <span class="counter">0</span>%</p>
+        </div>
+    </div>
+
+    <!-- Floating Social Links Sidebar -->
+    <div class="social-sidebar">
+        <a href="https://www.facebook.com/share/1CWEAE4fRa/" target="_blank" class="social-icon" title="Facebook">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/papai.pakhira6?igsh=cWRoc2s2bml1dnpn" target="_blank" class="social-icon" title="Instagram">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="https://youtube.com/@papai550?si=4LsElgdCNzrsl6XZ" target="_blank" class="social-icon" title="YouTube">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+        </a>
+        <a href="https://wa.me/9107001192076" target="_blank" class="social-icon whatsapp-icon" title="WhatsApp (+91 07001192076)">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </a>
+        <a href="tel:07001192076" class="social-icon call-icon" title="Call Now (+91 07001192076)">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </a>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Minimal Header -->
+    <header class="header">
+        <div class="logo">
+            <img src="./Data/6.png" alt="Papai Studio" class="nav-logo">
+        </div>
+        <div class="menu-btn hover-target">MENU</div>
+    </header>
+
+    <!-- Main Scroll Container for Lenis -->
+    <main class="smooth-scroll-wrapper">
+        
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-bg" data-speed="calc(1 - 0.5)">
+                <h1 class="hero-text-bg">PAPAI STUDIO</h1>
+            </div>
+
+            <div class="hero-content" style="text-align: center; max-width: 800px; margin: auto; left: 0; right: 0;">
+                <h2 class="hero-title" style="font-size: 5rem; color: #fff; text-shadow: 0 10px 30px rgba(0,0,0,0.8);">Crafting Memories.</h2>
+                <p class="hero-subtitle" style="font-size: 1.2rem; margin-top: 20px;">Redefining Bengali wedding photography with cinematic grandeur. Experience emotions in 3D depth and pure visual fidelity.</p>
+                <div style="margin-top:40px;">
+                     <a href="https://wa.me/9107001192076" class="location-btn hover-target" style="padding: 20px 50px; font-size: 1.2rem;">BOOK NOW</a>
+                </div>
+            </div>
+            
+            <!-- Mouse Button Animation Fix -->
+            <div class="mouse-scroll-indicator">
+                <div class="mouse-wheel"></div>
+            </div>
+        </section>
+
+        <!-- Statement Section -->
+        <section class="statement-section">
+            <div class="container">
+                <p class="statement-text">
+                    WE DON'T JUST TAKE PICTURES. <br>
+                    <span class="gold">WE FREEZE TIME.</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- Horizontal Scroll Gallery -->
+        <section class="gallery-section">
+            <div class="gallery-pin">
+                <div class="gallery-container">
+                    
+                    <div class="gallery-item">
+                        <div class="img-wrapper">
+                            <img src="./Data/1.jpeg" alt="Wedding 1" class="gallery-img">
+                        </div>
+                        <h3 class="gallery-title">BRIDAL ESSENCE</h3>
+                        <span class="gallery-num">01</span>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div class="img-wrapper">
+                            <img src="./Data/2.jpeg" alt="Wedding 2" class="gallery-img">
+                        </div>
+                        <h3 class="gallery-title">PRE-WEDDING</h3>
+                        <span class="gallery-num">02</span>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div class="img-wrapper">
+                            <img src="./Data/3.jpeg" alt="Wedding 3" class="gallery-img">
+                        </div>
+                        <h3 class="gallery-title">SACRED RITUALS</h3>
+                        <span class="gallery-num">03</span>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div class="img-wrapper">
+                            <img src="./Data/4.jpeg" alt="Wedding 4" class="gallery-img">
+                        </div>
+                        <h3 class="gallery-title">GRAND MOMENTS</h3>
+                        <span class="gallery-num">04</span>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div class="img-wrapper">
+                            <img src="./Data/5.jpeg" alt="Wedding 5" class="gallery-img">
+                        </div>
+                        <h3 class="gallery-title">CINEMATIC GLORY</h3>
+                        <span class="gallery-num">05</span>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div class="img-wrapper">
+                            <img src="./Data/6.jpeg" alt="Wedding 6" class="gallery-img">
+                        </div>
+                        <h3 class="gallery-title">TIMELESS</h3>
+                        <span class="gallery-num">06</span>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div class="img-wrapper">
+                            <img src="./Data/7.jpeg" alt="Wedding 7" class="gallery-img">
+                        </div>
+                        <h3 class="gallery-title">AURA OF LOVE</h3>
+                        <span class="gallery-num">07</span>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div class="img-wrapper">
+                            <img src="./Data/8.jpeg" alt="Wedding 8" class="gallery-img">
+                        </div>
+                        <h3 class="gallery-title">VIBRANT HUES</h3>
+                        <span class="gallery-num">08</span>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div class="img-wrapper">
+                            <img src="./Data/9.jpeg" alt="Wedding 9" class="gallery-img">
+                        </div>
+                        <h3 class="gallery-title">CANDID JOY</h3>
+                        <span class="gallery-num">09</span>
+                    </div>
+
+                    <div class="gallery-item">
+                        <div class="img-wrapper">
+                            <img src="./Data/10.jpeg" alt="Wedding 10" class="gallery-img">
+                        </div>
+                        <h3 class="gallery-title">THE ETERNAL PROMISE</h3>
+                        <span class="gallery-num">10</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Expertise (Services Grid) -->
+        <section class="services-modern">
+            <div class="container">
+                <h2 class="section-heading">FEATURED SERVICES</h2>
+                <h3 class="section-sub">WHAT WE OFFER</h3>
+                
+                <div class="services-grid">
+                    <div class="service-card hover-target" onclick="toggleModal('service-modal-1')">
+                        <div class="service-media">
+                            <img src="./Data/hero_bengali.png" alt="Bengali Wedding">
+                        </div>
+                        <div class="service-info">
+                            <h4>BENGALI WEDDINGS</h4>
+                            <p>Capture the essence of pure tradition.</p>
+                            <span class="click-more">Click to Explore +</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card hover-target" onclick="toggleModal('service-modal-2')">
+                        <div class="service-media">
+                            <img src="./Data/haldi.png" alt="Haldi Ceremony">
+                        </div>
+                        <div class="service-info">
+                            <h4>HALDI CEREMONY</h4>
+                            <p>Vibrant colors, timeless emotions.</p>
+                            <span class="click-more">Click to Explore +</span>
+                        </div>
+                    </div>
+
+                    <div class="service-card hover-target" onclick="toggleModal('service-modal-3')">
+                        <div class="service-media">
+                            <img src="./Data/drone.png" alt="Drone Cinematography">
+                        </div>
+                        <div class="service-info">
+                            <h4>DRONE CINEMATOGRAPHY</h4>
+                            <p>Grand aerial shots in 4K resolution.</p>
+                            <span class="click-more">Click to Explore +</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-card hover-target" onclick="toggleModal('service-modal-4')">
+                        <div class="service-media">
+                            <img src="./Data/2.jpeg" alt="Other Services">
+                        </div>
+                        <div class="service-info">
+                            <h4>BIRTHDAYS & EVENTS</h4>
+                            <p>Rice ceremony, baby shoots, and more.</p>
+                            <span class="click-more">Click to Explore +</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team & Pricing Strategy -->
+        <section class="team-pricing-section">
+             <div class="container dual-grid">
+                 <!-- Team Box -->
+                 <div class="info-box team-box">
+                     <h2 class="gold-subtitle">OUR PROFESSIONALISM</h2>
+                     <h3 class="bold-title">Meet <span class="gold">Papai Pakhira</span></h3>
+                     <p>As the founder and master cinematographer of Papai Studio, Papai Pakhira ensures every shot is embedded with deep emotion. We use the latest mirrorless cameras, G-Master lenses, and an editing pipeline built for perfection.</p>
+                     <img src="./Data/6.png" class="team-brand-logo">
+                 </div>
+                 
+                 <!-- Pricing Box -->
+                 <div class="info-box pricing-box">
+                     <h2 class="gold-subtitle">TRANSPARENT PRICING</h2>
+                     <h3 class="bold-title">Invest in <span class="gold">Memories</span></h3>
+                     <p>We believe every wedding is unique. Our packages are deeply tailored. We offer exclusive packages for full Bengali Wedding + Reception coverage with Pre-Wedding drone additions.</p>
+                     <a href="https://wa.me/9107001192076" class="location-btn hover-target">GET A QUOTE</a>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Dynamic Reviews -->
+        <section class="reviews-section">
+             <h2 class="section-heading text-center">CLIENT LOVE</h2>
+             <div class="reviews-slider">
+                 <div class="review-card">
+                     <div class="stars">★★★★★</div>
+                     <p class="review-text">"Papai Studio completely transformed our wedding photography. The level of detail and color grading they did for our Bengali wedding is incredible!"</p>
+                     <span class="reviewer">- Anjali Sengupta</span>
+                 </div>
+                 <div class="review-card">
+                     <div class="stars">★★★★★</div>
+                     <p class="review-text">"Papai and team are true professionals. The drone video during our Haldi was mind-blowing! Highly recommended for any event in Howrah."</p>
+                     <span class="reviewer">- Rohan & Sneha</span>
+                 </div>
+                 <div class="review-card">
+                     <div class="stars">★★★★★</div>
+                     <p class="review-text">"Best in class photo studio. Got passports and baby shoots done flawlessly. They treat you like family."</p>
+                     <span class="reviewer">- Pradip Das</span>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Dynamic Blogs Expanded -->
+        <section class="blog-section">
+             <div class="container">
+                 <h2 class="section-heading text-center">STUDIO INSIGHTS</h2>
+                 <h3 class="section-sub text-center" style="margin-bottom: 60px;">OUR BENGALI WEDDING BLOG</h3>
+                 <div class="blog-grid">
+                     <article class="blog-card">
+                         <div class="blog-img-holder">
+                             <img src="./Data/6.jpeg" alt="Blog 1">
+                         </div>
+                         <div class="blog-content">
+                             <a href="#" class="blog-cat">Tips & Tricks</a>
+                             <h4>How to Pose Perfectly for Your Haldi Ceremony</h4>
+                             <p>Candid moments during Gaye Holud are notoriously difficult to control. Discover out top secrets to ensuring the turmeric yellows pop without losing your natural charm.</p>
+                             <button class="location-btn" style="padding: 10px 20px; font-size: 0.8rem; margin-top:20px;">READ MORE</button>
+                         </div>
+                     </article>
+                     
+                     <article class="blog-card">
+                         <div class="blog-img-holder">
+                             <img src="./Data/8.jpeg" alt="Blog 2">
+                         </div>
+                         <div class="blog-content">
+                             <a href="#" class="blog-cat">Cinematography</a>
+                             <h4>Why Drone Photography is Essential in Indian Weddings</h4>
+                             <p>Establishing shots of your mandap from 400ft in the air adds Hollywood-level production value to your wedding film. Learn why it's our most requested feature.</p>
+                             <button class="location-btn" style="padding: 10px 20px; font-size: 0.8rem; margin-top:20px;">READ MORE</button>
+                         </div>
+                     </article>
+
+                     <article class="blog-card">
+                         <div class="blog-img-holder">
+                             <img src="./Data/10.jpeg" alt="Blog 3">
+                         </div>
+                         <div class="blog-content">
+                             <a href="#" class="blog-cat">Culture</a>
+                             <h4>The Significance of the Topor and Chandan</h4>
+                             <p>Bengali weddings are rich in tradition and stylistic heritage. The intricate designs are not just makeup, they are history.</p>
+                             <button class="location-btn" style="padding: 10px 20px; font-size: 0.8rem; margin-top:20px;">READ MORE</button>
+                         </div>
+                     </article>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Modal Overlays (Hidden by Default) -->
+        <div id="service-modal-1" class="custom-modal">
+            <div class="modal-content">
+                <span class="close-btn hover-target" onclick="toggleModal('service-modal-1')">✕ CLOSER</span>
+                <h2>Traditional Bengali Weddings</h2>
+                <img src="./Data/hero_bengali.png" alt="Bengali Wedding Details" class="modal-img">
+                <p>From the holy Chandan art to the Sindoor Daan, we capture every authentic ritual in stunning 4K and deep contrast. Our team blends into the environment to take candid masterpieces.</p>
+            </div>
+            <div class="modal-bg" onclick="toggleModal('service-modal-1')"></div>
+        </div>
+
+        <div id="service-modal-2" class="custom-modal">
+            <div class="modal-content">
+                <span class="close-btn hover-target" onclick="toggleModal('service-modal-2')">✕ CLOSER</span>
+                <h2>Haldi / Gaye Holud</h2>
+                <img src="./Data/haldi.png" alt="Haldi Video" class="modal-img">
+                <p>Vibrant yellows and deep cinematic shadows. We do slow-motion captures of petal drops and water splashes to make your cinematic film truly Awwwards worthy.</p>
+            </div>
+            <div class="modal-bg" onclick="toggleModal('service-modal-2')"></div>
+        </div>
+        
+        <div id="service-modal-3" class="custom-modal">
+            <div class="modal-content">
+                <span class="close-btn hover-target" onclick="toggleModal('service-modal-3')">✕ CLOSER</span>
+                <h2>Drone Cinematography</h2>
+                <img src="./Data/drone.png" alt="Drone View" class="modal-img">
+                <p>See your wedding venue from the sky. Licensed operators flying massive multi-rotor drones to get those sweep establishing shots of the mandap and baraat.</p>
+            </div>
+            <div class="modal-bg" onclick="toggleModal('service-modal-3')"></div>
+        </div>
+
+        <div id="service-modal-4" class="custom-modal">
+            <div class="modal-content">
+                <span class="close-btn hover-target" onclick="toggleModal('service-modal-4')">✕ CLOSER</span>
+                <h2>All Photography & Office Services</h2>
+                <p>Papai Studio also operates as a fully functional professional front. We cover Birthdays, Rice Ceremonies (First Rice), Anniversaries. We also provide high-quality Xerox, Print, and immediate Passport Photo facilities at HQ.</p>
+            </div>
+            <div class="modal-bg" onclick="toggleModal('service-modal-4')"></div>
+        </div>
+
+        <!-- Grand Location Section -->
+        <section class="location-section">
+            <div class="container">
+                <div class="location-grid">
+                    <div class="location-text">
+                        <h2 class="section-heading">STUDIO</h2>
+                        <h3 class="section-sub">THE HQ</h3>
+                        <p>Experience our state-of-the-art cinematic studio. Visit us to discuss your vision.</p>
+                        <a href="https://maps.app.goo.gl/bAvFW6riVbL2ZiZJ9" target="_blank" class="location-btn hover-target">
+                            VIEW ON MAPS
+                        </a>
+                    </div>
+                    <div class="location-map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1200!2d88.0!3d22.0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Minimal Footer -->
+        <footer class="footer">
+            <div class="footer-logo-container">
+                <img src="./Data/6.png" alt="Papai Studio Footer Logo" class="footer-huge-logo">
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 PAPAI STUDIO x CINEMA.</p>
+                <div class="footer-links">
+                    <span>INSTAGRAM</span>
+                    <span>VIMEO</span>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
