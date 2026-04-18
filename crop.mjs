@@ -5,13 +5,16 @@ async function generateFavicon() {
     const inputPath = './Data/6.png';
     const pngFaviconPath = './Data/favicon.png';
     
-    // 1. Extract the center "P" logo area
+    // We discovered the exact bounding box of the logo elements.
+    // Content starts at Y: 111, X: 47. 
+    // Total width is 408. Center X is 47 + 204 = 251.
+    // We grab a 200x200 square right from the top center!
     const extractedBuffer = await sharp(inputPath)
       .extract({ 
-         left: 125, 
-         top: 20, 
-         width: 250, 
-         height: 250
+         left: 151,  // 251 (center) - 100
+         top: 111,   // Absolute top boundary from trim
+         width: 200, 
+         height: 200 // Grab top 200px (ignores the text below)
       })
       .toBuffer();
 
@@ -25,7 +28,7 @@ async function generateFavicon() {
       }
     })
     .composite([
-      { input: extractedBuffer } // The transparent PNG logo will be drawn exactly over the solid black background
+      { input: extractedBuffer } // Drop the perfectly cropped logo in
     ])
     .toFile(pngFaviconPath);
       
