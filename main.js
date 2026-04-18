@@ -37,13 +37,13 @@ if (cursor && !isMobile()) {
         mouseY = e.clientY;
     });
 
-    // Smooth lagged cursor — diamond table center = hotspot
-    // SVG width=28. Diamond table center is at 6,6.
+    // Smooth lagged cursor — camera shoulder = hotspot
+    // SVG width=28. Top-left of camera translates to roughly 4,8
     function tickCursor() {
         cursorX += (mouseX - cursorX) * 0.15;
         cursorY += (mouseY - cursorY) * 0.15;
         // Use transform for GPU compositing
-        cursor.style.transform = `translate(${cursorX - 6}px, ${cursorY - 6}px)`;
+        cursor.style.transform = `translate(${cursorX - 4}px, ${cursorY - 8}px)`;
         requestAnimationFrame(tickCursor);
     }
     // Remove the margin offset from CSS since we handle it here
