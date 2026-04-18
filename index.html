@@ -49,32 +49,34 @@
         </a>
     </div>
 
-    <!-- Custom Cursor — Gold Bridal Ring (desktop only) -->
+    <!-- Custom Cursor — Classical Brilliant Cut Gold Diamond Ring -->
     <div class="cursor" id="cursor">
-        <svg class="cursor-ring-svg" viewBox="0 0 36 36" width="36" height="36" xmlns="http://www.w3.org/2000/svg">
+        <svg class="cursor-ring-svg" viewBox="0 0 32 32" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
             <!-- Sparkles -->
-            <circle cx="2" cy="2" r="1.5" fill="white" opacity="0" class="sparkle s1"/>
-            <circle cx="20" cy="4" r="1" fill="white" opacity="0" class="sparkle s2"/>
-            <circle cx="4" cy="20" r="1" fill="#e8c88a" opacity="0" class="sparkle s3"/>
+            <circle cx="2" cy="10" r="1.5" fill="white" opacity="0" class="sparkle s1"/>
+            <circle cx="10" cy="2" r="1.5" fill="white" opacity="0" class="sparkle s2"/>
             
-            <!-- Ring Band -->
-            <circle cx="23" cy="23" r="10" stroke="#c9a96e" stroke-width="2.5" fill="none" />
-            <circle cx="23" cy="23" r="10" stroke="white" stroke-width="0.5" fill="none" opacity="0.3" transform="scale(0.95) translate(2,2)" />
+            <!-- Gold Ring Band (Bottom Right) -->
+            <circle cx="20" cy="20" r="9" stroke="#dbb571" stroke-width="2.5" fill="none" />
+            <circle cx="20" cy="20" r="9" stroke="white" stroke-width="0.5" fill="none" opacity="0.3" transform="scale(0.95) translate(1,1)" />
             
-            <!-- Prongs / Bezel -->
-            <polygon points="14,14 17,17 19,13" fill="#c9a96e" />
-            <polygon points="14,14 17,17 13,19" fill="#c9a96e" />
+            <!-- Gold Prongs holding the diamond -->
+            <path d="M 12 15 L 14 14 L 15 12" stroke="#dbb571" stroke-width="1.5" fill="none" />
             
-            <!-- Tilted Diamond -->
-            <g stroke="rgba(255,255,255,0.7)" stroke-width="0.5">
-                <!-- Top Right Facet -->
-                <polygon points="2,2 14,6 10,10" fill="white" />
-                <!-- Top Left Facet -->
-                <polygon points="2,2 10,10 6,14" fill="#e0f2fe" />
-                <!-- Bottom Right Facet -->
-                <polygon points="14,6 16,16 10,10" fill="#bae6fd" />
-                <!-- Bottom Left Facet -->
-                <polygon points="6,14 16,16 10,10" fill="#7dd3fc" />
+            <!-- Classic Brilliant Cut Diamond (Rotated 45 deg, flat table at top left) -->
+            <g stroke="rgba(255,255,255,0.7)" stroke-width="0.3" stroke-linejoin="round">
+                <!-- Center Table -->
+                <polygon points="4,8 8,4 9,5 5,9" fill="#ffffff" />
+                <!-- Left Crown -->
+                <polygon points="4,8 2,12 5,9" fill="#e0f2fe" />
+                <!-- Right Crown -->
+                <polygon points="8,4 12,2 9,5" fill="#bae6fd" />
+                <!-- Middle Crown -->
+                <polygon points="2,12 12,2 9,5 5,9" fill="#e0f2fe" opacity="0.75" />
+                <!-- Left Pavilion -->
+                <polygon points="2,12 14,14 7,7" fill="#7dd3fc" />
+                <!-- Right Pavilion -->
+                <polygon points="12,2 14,14 7,7" fill="#38bdf8" />
             </g>
         </svg>
     </div>

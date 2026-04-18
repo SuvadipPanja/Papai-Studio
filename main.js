@@ -37,13 +37,13 @@ if (cursor && !isMobile()) {
         mouseY = e.clientY;
     });
 
-    // Smooth lagged cursor — diamond TIP = hotspot (top-center of SVG)
-    // SVG width=40, height=52. Diamond tip is at SVG y≈3, so offset = -20px x, -3px y
+    // Smooth lagged cursor — diamond table center = hotspot
+    // SVG width=28. Diamond table center is at 6,6.
     function tickCursor() {
         cursorX += (mouseX - cursorX) * 0.15;
         cursorY += (mouseY - cursorY) * 0.15;
-        // Use transform for GPU compositing (no layout thrash)
-        cursor.style.transform = `translate(${cursorX - 20}px, ${cursorY - 3}px)`;
+        // Use transform for GPU compositing
+        cursor.style.transform = `translate(${cursorX - 6}px, ${cursorY - 6}px)`;
         requestAnimationFrame(tickCursor);
     }
     // Remove the margin offset from CSS since we handle it here
