@@ -98,6 +98,9 @@ const loader = document.querySelector('.loader');
 const counter = document.querySelector('.counter');
 const loaderLogo = document.querySelector('.loader-logo');
 const loaderBar = document.getElementById('loaderBar');
+const enterBtn = document.getElementById('enterBtn');
+const loaderText = document.getElementById('loaderText');
+const heroVideo = document.getElementById('heroVideo');
 
 if (loader && counter) {
     let progress = 0;
@@ -112,11 +115,26 @@ if (loader && counter) {
         if (progress < 100) {
             requestAnimationFrame(updateLoader);
         } else {
-            startIntro();
+            // Show Click To Enter button
+            gsap.to(loaderText, { opacity: 0, duration: 0.3, onComplete: () => {
+                loaderText.style.display = 'none';
+                if(enterBtn) enterBtn.style.display = 'inline-block';
+                gsap.from(enterBtn, { y: 10, opacity: 0, duration: 0.5 });
+            }});
         }
     }
 
     setTimeout(updateLoader, 200);
+}
+
+if (enterBtn) {
+    enterBtn.addEventListener('click', () => {
+        if (heroVideo) {
+            heroVideo.muted = false;
+            heroVideo.play().catch(e => console.log('Video play failed'));
+        }
+        startIntro();
+    });
 }
 
 function startIntro() {
