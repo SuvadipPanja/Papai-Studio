@@ -509,88 +509,111 @@ body {
     margin-top: 15px;
 }
 
-/* 10. GALLERY SECTION */
+/* 10. GALLERY SECTION — Swiper Coverflow */
 .gallery-section {
     background: var(--bg-dark);
+    padding: 100px 0 120px;
     position: relative;
 }
 
-.gallery-pin {
+.gallery-section .container {
+    margin-bottom: 50px;
+}
+
+.gallery-swiper {
+    width: 100%;
+    padding: 20px 0 60px;
+}
+
+.gallery-swiper .swiper-slide {
+    width: 340px;
+    height: 480px;
+    border-radius: 16px;
     overflow: hidden;
-}
-
-.gallery-container {
-    display: flex;
-    gap: 30px;
-    padding: 10vh 5vw;
-    width: max-content;
-}
-
-.gallery-item {
     position: relative;
-    width: 380px;
-    flex-shrink: 0;
+    cursor: grab;
 }
 
-.img-wrapper {
-    width: 380px;
-    height: 520px;
-    overflow: hidden;
-    border-radius: 4px;
-    position: relative;
+.gallery-swiper .swiper-slide:active {
+    cursor: grabbing;
 }
 
-.gallery-img {
+.gallery-swiper .swiper-slide img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1.2);
+    pointer-events: none;
+    display: block;
     transition: transform 0.6s ease;
 }
 
-.gallery-item:hover .gallery-img {
-    transform: scale(1.1);
+.gallery-swiper .swiper-slide:hover img {
+    transform: scale(1.05);
 }
 
-.gallery-title {
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    letter-spacing: 3px;
-    margin-top: 20px;
-    color: var(--text-dim);
-    font-weight: 300;
-}
-
-.gallery-num {
-    font-family: var(--font-serif);
-    font-size: 0.75rem;
-    color: var(--gold);
+.slide-label {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 20px 22px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.8);
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* Mobile gallery (vertical scroll) */
+.gallery-swiper .swiper-slide-active .slide-label,
+.gallery-swiper .swiper-slide:hover .slide-label {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--gold) !important;
+    background: rgba(0,0,0,0.5);
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50%;
+    border: 1px solid rgba(201,169,110,0.4);
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 1rem !important;
+    font-weight: 700;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background: var(--gold);
+    color: #000 !important;
+}
+
+.swiper-pagination-bullet {
+    background: rgba(201,169,110,0.4) !important;
+    width: 8px;
+    height: 8px;
+}
+
+.swiper-pagination-bullet-active {
+    background: var(--gold) !important;
+    width: 24px;
+    border-radius: 4px;
+    transition: width 0.3s;
+}
+
 @media (max-width: 768px) {
-    .gallery-section {
-        overflow: visible;
-    }
-    .gallery-pin {
-        overflow: visible;
-        height: auto !important;
-    }
-    .gallery-container {
-        flex-direction: column;
-        width: 100%;
-        padding: 5vh 5vw;
-        gap: 20px;
-    }
-    .gallery-item {
-        width: 100%;
-    }
-    .img-wrapper {
-        width: 100%;
-        height: 260px;
+    .gallery-swiper .swiper-slide {
+        width: 260px;
+        height: 360px;
     }
 }
 
@@ -637,7 +660,7 @@ body {
 
 .text-center { text-align: center; }
 
-/* 12. SERVICES GRID */
+/* 12. SERVICES GRID — Full height image card with hover overlay text */
 .services-modern {
     padding: 12vh 0;
     background: var(--bg-mid);
@@ -645,80 +668,99 @@ body {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
     margin-top: 50px;
 }
 
+@media (max-width: 900px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 550px) {
+    .services-grid { grid-template-columns: 1fr; }
+}
+
 .service-card {
-    background: rgba(255,255,255,0.02);
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.05);
-    transition: var(--transition);
+    position: relative;
     cursor: pointer;
+    aspect-ratio: 3/4;
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(201,169,110,0.4);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
 }
 
 .service-media {
-    height: 240px;
-    overflow: hidden;
-    position: relative;
+    position: absolute;
+    inset: 0;
 }
 
 .service-media img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.75);
-    transition: transform 0.6s ease, filter 0.4s ease;
+    filter: brightness(0.6);
+    transition: transform 0.7s cubic-bezier(0.165,0.84,0.44,1), filter 0.5s ease;
+}
+
+.service-card:hover .service-media img {
+    transform: scale(1.07);
+    filter: brightness(0.45);
 }
 
 .service-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(7,7,7,0.6) 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px 24px;
+    transition: background 0.4s ease;
 }
 
-.service-card:hover .service-media img {
-    transform: scale(1.08);
-    filter: brightness(0.9);
-}
-
-.service-info {
-    padding: 25px;
-}
-
-.service-info h4 {
-    font-size: 1.1rem;
-    color: var(--gold);
-    margin-bottom: 8px;
-    letter-spacing: 2px;
+.service-overlay h4 {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    letter-spacing: 2.5px;
+    color: #fff;
+    margin-bottom: 6px;
     font-weight: 500;
 }
 
-.service-info p {
-    color: var(--text-dim);
-    font-size: 0.85rem;
-    margin-bottom: 15px;
+.service-overlay p {
     font-family: var(--font-body);
-    line-height: 1.6;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 14px;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.service-card:hover .service-overlay p {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .click-more {
-    font-size: 0.75rem;
-    color: var(--text-dim);
+    font-size: 0.72rem;
+    color: var(--gold);
     letter-spacing: 2px;
     text-transform: uppercase;
-    transition: color 0.3s;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s;
 }
 
-.service-card:hover .click-more { color: var(--gold); }
+.service-card:hover .click-more {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 /* 13. BRIDAL TIPS SECTION */
 .tips-section {
@@ -769,22 +811,146 @@ body {
     line-height: 1.7;
 }
 
-/* 14. TEAM & PRICING */
+/* 14. PROFESSIONALISM & PRICING */
 .team-pricing-section {
     padding: 12vh 0;
     background: var(--bg-mid);
 }
 
-.dual-grid {
+/* Professionalism Section */
+.prof-section {
+    margin-bottom: 30px;
+}
+
+.prof-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 60px;
+    margin-top: 50px;
+    align-items: start;
 }
 
 @media (max-width: 900px) {
-    .dual-grid { grid-template-columns: 1fr; }
+    .prof-grid { grid-template-columns: 1fr; gap: 40px; }
 }
 
+.prof-intro {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.prof-bio p {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.prof-bio strong { color: var(--text-light); }
+
+/* Gear List */
+.gear-list {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.gear-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 18px 20px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+
+.gear-item:hover {
+    background: rgba(201,169,110,0.06);
+}
+
+.gear-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+.gear-item strong {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    color: var(--text-light);
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.gear-item span {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+/* Logo + Stats side */
+.prof-logo-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    position: sticky;
+    top: 100px;
+}
+
+.prof-logo-img {
+    width: 100%;
+    max-width: 250px;
+    filter: drop-shadow(0 0 30px rgba(201,169,110,0.25));
+}
+
+.stats-row {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.stat {
+    text-align: center;
+    padding: 20px 24px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    min-width: 90px;
+}
+
+.stat-num {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.stat-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* Shared info-box */
 .info-box {
     padding: clamp(30px, 4vw, 55px);
     background: rgba(255,255,255,0.02);
@@ -818,12 +984,6 @@ body {
     margin-bottom: 25px;
     font-family: var(--font-body);
     font-size: 0.95rem;
-}
-
-.team-brand-logo {
-    width: 70px;
-    opacity: 0.5;
-    margin-top: 20px;
 }
 
 .pricing-features {

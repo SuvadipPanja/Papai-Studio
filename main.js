@@ -150,34 +150,36 @@ if (!isMobile()) {
 }
 
 // ─────────────────────────────────────────────
-// 6. SWIPER 3D CAROUSEL
+// 6. SWIPER — Coverflow Gallery
 // ─────────────────────────────────────────────
-const swiper = new Swiper('.gallery-swiper', {
-    effect: 'coverflow',
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: 'auto',
-    loop: true,
-    coverflowEffect: {
-        rotate: 15,
-        stretch: 0,
-        depth: 300,
-        modifier: 1,
-        slideShadows: true,
-    },
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-    autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-    }
-});
+if (typeof Swiper !== 'undefined') {
+    new Swiper('.gallery-swiper', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        loop: true,
+        coverflowEffect: {
+            rotate: 20,
+            stretch: 30,
+            depth: 250,
+            modifier: 1,
+            slideShadows: true,
+        },
+        autoplay: {
+            delay: 3500,
+            disableOnInteraction: false,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+    });
+}
 
 // ─────────────────────────────────────────────
 // 7. SCROLL TRIGGERED FADE-INS
