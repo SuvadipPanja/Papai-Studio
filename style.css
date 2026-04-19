@@ -909,6 +909,67 @@ body.ready .cursor {
     gap: 20px;
 }
 
+/* Camera Product Showcase Card */
+.camera-showcase {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1508 100%);
+    border: 1px solid rgba(201,169,110,0.2);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-height: 160px;
+}
+
+.camera-showcase-img {
+    width: 55%;
+    height: 160px;
+    object-fit: cover;
+    object-position: center;
+    flex-shrink: 0;
+    border-right: 1px solid rgba(201,169,110,0.15);
+    filter: brightness(0.92) contrast(1.05);
+    transition: transform 0.6s ease;
+}
+
+.camera-showcase:hover .camera-showcase-img {
+    transform: scale(1.04);
+}
+
+.camera-badge {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.camera-brand {
+    font-family: var(--font-serif);
+    font-size: 0.6rem;
+    letter-spacing: 6px;
+    color: var(--gold);
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+
+.camera-model {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--text-light);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+.camera-type {
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
 .gear-item {
     display: flex;
     gap: 16px;
