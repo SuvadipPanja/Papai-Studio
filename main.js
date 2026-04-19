@@ -320,3 +320,36 @@ hoverReels.forEach(video => {
         video.pause();
     });
 });
+
+// ─────────────────────────────────────────────
+// 11. HERO VIDEO AUDIO CONTROLS (Low Volume setup)
+// ─────────────────────────────────────────────
+if (heroVideo) {
+    heroVideo.volume = 0.15; // Play with low sound
+    
+    const attemptPlayVideo = () => {
+        heroVideo.muted = false;
+        let playPromise = heroVideo.play();
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                // Autoplay blocked by browser policy. Play muted visually, then unmute on interaction.
+                heroVideo.muted = true;
+                heroVideo.play().catch(e => console.log('Muted fallback failed:', e));
+                
+                const unmuteOnInteract = () => {
+                    heroVideo.muted = false;
+                    heroVideo.volume = 0.15;
+                    ['click', 'touchstart', 'scroll'].forEach(evt => {
+                        document.removeEventListener(evt, unmuteOnInteract);
+                    });
+                };
+                
+                ['click', 'touchstart', 'scroll'].forEach(evt => {
+                    document.addEventListener(evt, unmuteOnInteract, { once: true });
+                });
+            });
+        }
+    };
+    
+    setTimeout(attemptPlayVideo, 100);
+}
