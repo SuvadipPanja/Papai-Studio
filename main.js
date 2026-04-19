@@ -150,50 +150,34 @@ if (!isMobile()) {
 }
 
 // ─────────────────────────────────────────────
-// 6. HORIZONTAL GALLERY (desktop) / skip on mobile
+// 6. SWIPER 3D CAROUSEL
 // ─────────────────────────────────────────────
-if (!isMobile()) {
-    const gallerySection = document.querySelector('.gallery-section');
-    const galleryContainer = document.querySelector('.gallery-container');
-
-    if (gallerySection && galleryContainer) {
-        const getScrollAmount = () => -(galleryContainer.scrollWidth - window.innerWidth);
-
-        const galleryTween = gsap.to(galleryContainer, {
-            x: getScrollAmount,
-            duration: 3,
-            ease: 'none'
-        });
-
-        ScrollTrigger.create({
-            trigger: gallerySection,
-            start: 'top 10%',
-            end: () => `+=${getScrollAmount() * -1}`,
-            pin: true,
-            animation: galleryTween,
-            scrub: 1.2,
-            invalidateOnRefresh: true
-        });
-
-        // Inner image parallax
-        gsap.utils.toArray('.gallery-img').forEach(img => {
-            gsap.fromTo(img,
-                { scale: 1.2 },
-                {
-                    scale: 1,
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: img.closest('.img-wrapper'),
-                        containerAnimation: galleryTween,
-                        start: 'left right',
-                        end: 'right left',
-                        scrub: true
-                    }
-                }
-            );
-        });
+const swiper = new Swiper('.gallery-swiper', {
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    loop: true,
+    coverflowEffect: {
+        rotate: 15,
+        stretch: 0,
+        depth: 300,
+        modifier: 1,
+        slideShadows: true,
+    },
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
     }
-}
+});
 
 // ─────────────────────────────────────────────
 // 7. SCROLL TRIGGERED FADE-INS
