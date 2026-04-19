@@ -26,7 +26,13 @@
 
 html {
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) #111;
 }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
 
 body {
     background: var(--bg-dark);
@@ -40,7 +46,7 @@ body {
 
 @media (max-width: 768px) {
     body {
-        cursor: auto; /* restore native cursor on mobile */
+        cursor: auto;
     }
 }
 
@@ -539,9 +545,11 @@ body.ready .cursor {
 
 /* 9. STATEMENT SECTION */
 .statement-section {
-    padding: 15vh 5vw;
+    padding: 8vh 5vw;
     background: var(--bg-dark);
     text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
 .statement-text {
@@ -561,12 +569,12 @@ body.ready .cursor {
 /* 10. GALLERY SECTION — Swiper Coverflow */
 .gallery-section {
     background: var(--bg-dark);
-    padding: 100px 0 120px;
+    padding: 70px 0 100px;
     position: relative;
 }
 
 .gallery-section .container {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 .gallery-swiper {
@@ -684,10 +692,11 @@ body.ready .cursor {
 
 .section-heading {
     font-family: var(--font-serif);
-    font-size: clamp(2rem, 5vw, 4rem);
-    letter-spacing: 4px;
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    letter-spacing: 3px;
     color: var(--text-light);
     margin-bottom: 10px;
+    line-height: 1.15;
 }
 
 .section-sub {
@@ -711,8 +720,9 @@ body.ready .cursor {
 
 /* 12. SERVICES GRID — Full height image card with hover overlay text */
 .services-modern {
-    padding: 12vh 0;
+    padding: 9vh 0 10vh;
     background: var(--bg-mid);
+    border-top: 1px solid rgba(255,255,255,0.04);
 }
 
 .services-grid {
@@ -1483,4 +1493,33 @@ body.ready .cursor {
         padding: 20px 20px;
     }
     .nav-logo { width: 65px; }
+    .reviews-slider {
+        padding: 0;
+        gap: 20px;
+    }
+    
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 21. STICKY WHATSAPP BUTTON */
+.sticky-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    z-index: 999;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sticky-whatsapp:hover {
+    transform: scale(1.1) translateY(-5px);
 }
