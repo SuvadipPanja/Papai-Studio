@@ -303,3 +303,19 @@ ScrollTrigger.create({
         header.style.transition = 'all 0.4s ease';
     }
 });
+
+// ─────────────────────────────────────────────
+// 10. VIDEO REEL HOVER LOGIC
+// ─────────────────────────────────────────────
+const hoverReels = document.querySelectorAll('.hover-reel');
+hoverReels.forEach(video => {
+    const parentCard = video.parentElement;
+    parentCard.addEventListener('mouseenter', () => {
+        video.muted = false; // Note: Some browsers block unmuted autoplay without prior interaction. If blocked, users just need to click anywhere first.
+        video.play().catch(e => console.log('Autoplay prevented on hover'));
+    });
+    
+    parentCard.addEventListener('mouseleave', () => {
+        video.pause();
+    });
+});

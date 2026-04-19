@@ -718,6 +718,72 @@ body.ready .cursor {
 
 .text-center { text-align: center; }
 
+/* 11b. CINEMATIC REELS SECTION */
+.video-reels-section {
+    background: var(--bg-dark);
+    padding: 70px 0;
+    position: relative;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+
+.reels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.reel-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 9/16;
+    background: #000;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+.hover-reel {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.reel-card:hover .hover-reel {
+    transform: scale(1.05);
+}
+
+.reel-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.reel-card:hover .reel-overlay {
+    opacity: 0;
+}
+
+.play-icon {
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.9);
+    background: rgba(0,0,0,0.5);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding-left: 5px; /* offset play triangle slightly to center */
+}
+
 /* 12. SERVICES GRID — Full height image card with hover overlay text */
 .services-modern {
     padding: 9vh 0 10vh;
