@@ -55,16 +55,16 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.55) saturate(1.2);
-    transform: scale(1.05);
+    filter: brightness(0.75) saturate(1.3);
+    transform: scale(1.02);
 }
 
 .glass-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(7,7,7,0.4) 0%, rgba(7,7,7,0.7) 100%);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: linear-gradient(180deg, rgba(7,7,7,0.25) 0%, rgba(7,7,7,0.55) 100%);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 /* 3. GRAIN OVERLAY */
@@ -78,12 +78,19 @@ body {
 }
 
 /* 4. CUSTOM CURSOR — Cinematic Camera */
+/* Hidden until body.ready is set by JS */
 .cursor {
     position: fixed;
     top: 0;
     left: 0;
     pointer-events: none;
     z-index: 99999;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.ready .cursor {
+    opacity: 1;
 }
 
 .cursor-camera-svg {
@@ -124,28 +131,70 @@ body {
 .loader {
     position: fixed;
     inset: 0;
-    background: var(--bg-dark);
+    background: #050505;
     z-index: 99998;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    gap: 0;
 }
 
 .loader-content {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
 }
 
+/* Bigger logo with breathing glow */
 .loader-logo {
-    width: 120px;
-    margin-bottom: 30px;
-    filter: drop-shadow(0 0 20px rgba(201,169,110,0.5));
+    width: 220px;
+    margin-bottom: 36px;
+    filter: drop-shadow(0 0 24px rgba(201,169,110,0.45));
+    animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+    0%, 100% { filter: drop-shadow(0 0 18px rgba(201,169,110,0.3)); }
+    50%       { filter: drop-shadow(0 0 40px rgba(201,169,110,0.7)); }
+}
+
+/* Studio name under logo */
+.loader-brand {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 8px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0.8;
+}
+
+/* Progress bar track */
+.loader-bar-track {
+    width: 160px;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+
+/* Progress bar fill */
+.loader-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.08s linear;
 }
 
 .loader-subtitle {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
     letter-spacing: 4px;
-    color: var(--text-dim);
+    color: rgba(240,236,230,0.35);
     font-family: var(--font-sans);
     text-transform: uppercase;
 }

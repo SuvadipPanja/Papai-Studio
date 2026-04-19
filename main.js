@@ -97,14 +97,18 @@ document.addEventListener('keydown', (e) => {
 const loader = document.querySelector('.loader');
 const counter = document.querySelector('.counter');
 const loaderLogo = document.querySelector('.loader-logo');
+const loaderBar = document.getElementById('loaderBar');
 
 if (loader && counter) {
     let progress = 0;
 
     function updateLoader() {
-        progress += Math.random() * 3 + 0.5;
+        progress += Math.random() * 3 + 0.8;
         if (progress > 100) progress = 100;
-        counter.textContent = Math.floor(progress);
+        const pct = Math.floor(progress);
+        counter.textContent = pct;
+        // Drive the progress bar fill
+        if (loaderBar) loaderBar.style.width = pct + '%';
         if (progress < 100) {
             requestAnimationFrame(updateLoader);
         } else {
@@ -112,23 +116,28 @@ if (loader && counter) {
         }
     }
 
-    setTimeout(updateLoader, 300);
+    setTimeout(updateLoader, 200);
 }
 
 function startIntro() {
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+        onComplete: () => {
+            // Reveal cursor only after intro is completely done
+            document.body.classList.add('ready');
+        }
+    });
 
-    tl.to(loaderLogo, { y: -30, opacity: 0, duration: 0.6, ease: 'power4.out' })
-      .to(loader, { yPercent: -100, duration: 1, ease: 'power4.inOut' }, '-=0.2')
-      .from('.global-glass-bg', { scale: 1.08, opacity: 0, duration: 2, ease: 'power3.out' }, '-=0.4')
-      .from('.hero-text-bg', { scale: 0.85, opacity: 0, duration: 2, ease: 'power3.out' }, '-=1.8')
-      .from('.header', { y: -30, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=1.5')
+    tl.to(loaderLogo, { y: -40, opacity: 0, duration: 0.5, ease: 'power4.out' })
+      .to(loader, { yPercent: -100, duration: 1.1, ease: 'power4.inOut' }, '-=0.15')
+      .from('.global-glass-bg', { scale: 1.06, opacity: 0, duration: 2.2, ease: 'power3.out' }, '-=0.5')
+      .from('.hero-text-bg', { scale: 0.88, opacity: 0, duration: 2, ease: 'power3.out' }, '-=2')
+      .from('.header', { y: -30, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=1.6')
       .from('.social-sidebar', { x: 30, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=1')
-      .from('.hero-tiny-top', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=1.2')
-      .to('.hero-title .word', { y: 0, opacity: 1, stagger: 0.2, duration: 1.2, ease: 'power4.out' }, '-=0.6')
-      .from('.hero-divider', { scaleY: 0, opacity: 0, duration: 0.8, ease: 'power4.inOut' }, '-=0.8')
-      .from('.hero-subtitle', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
-      .from('.hero-cta-group', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
+      .from('.hero-tiny-top', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=1')
+      .to('.hero-title .word', { y: 0, opacity: 1, stagger: 0.2, duration: 1.2, ease: 'power4.out' }, '-=0.7')
+      .from('.hero-divider', { scaleY: 0, opacity: 0, duration: 0.8, ease: 'power4.inOut' }, '-=0.6')
+      .from('.hero-subtitle', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+      .from('.hero-cta-group', { y: 20, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
       .from('.mouse-scroll-indicator', { opacity: 0, duration: 0.5 }, '-=0.3');
 }
 
