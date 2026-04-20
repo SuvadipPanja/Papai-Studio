@@ -193,7 +193,7 @@ if (typeof Swiper !== 'undefined') {
     // ─────────────────────────────────────────────
     // 6b. SWIPER — Coverflow Reels
     // ─────────────────────────────────────────────
-    new Swiper('.reels-swiper', {
+    const reelsSwiper = new Swiper('.reels-swiper', {
         effect: 'coverflow',
         grabCursor: true,
         centeredSlides: true,
@@ -214,6 +214,26 @@ if (typeof Swiper !== 'undefined') {
             el: '.reels-swiper .swiper-pagination',
             clickable: true,
         },
+        on: {
+            init: function() {
+                // Play video in the first active slide
+                const activeVideo = this.slides[this.activeIndex].querySelector('video');
+                if (activeVideo) activeVideo.play().catch(() => {});
+            },
+            slideChange: function() {
+                // Pause all videos
+                this.slides.forEach(slide => {
+                    const video = slide.querySelector('video');
+                    if (video) {
+                        video.pause();
+                        video.currentTime = 0; // Reset to start
+                    }
+                });
+                // Play active one
+                const activeVideo = this.slides[this.activeIndex].querySelector('video');
+                if (activeVideo) activeVideo.play().catch(() => {});
+            }
+        }
     });
 }
 
@@ -332,18 +352,19 @@ ScrollTrigger.create({
 });
 
 // ─────────────────────────────────────────────
-// 10. VIDEO REEL HOVER LOGIC
+// 10. VIDEO REEL INTERACTION LOGIC
 // ─────────────────────────────────────────────
-const hoverReels = document.querySelectorAll('.hover-reel');
-hoverReels.forEach(video => {
-    const parentCard = video.parentElement;
-    parentCard.addEventListener('mouseenter', () => {
-        video.muted = false; // Note: Some browsers block unmuted autoplay without prior interaction. If blocked, users just need to click anywhere first.
-        video.play().catch(e => console.log('Autoplay prevented on hover'));
-    });
+// The swiper on:slideChange handles basic play/pause.
+// This adds click-to-unmute and ensures smooth interaction.
+document.querySelectorAll('.hover-reel').forEach(video => {
+    const parentSlide = video.closest('.swiper-slide');
     
-    parentCard.addEventListener('mouseleave', () => {
-        video.pause();
+    // Toggle mute on click if it's the active slide
+    parentSlide.addEventListener('click', () => {
+        if (parentSlide.classList.contains('swiper-slide-active')) {
+            video.muted = !video.muted;
+            // Visual feedback could be added here if needed
+        }
     });
 });
 
