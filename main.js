@@ -181,11 +181,37 @@ if (typeof Swiper !== 'undefined') {
             disableOnInteraction: false,
         },
         navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
+            nextEl: '.gallery-swiper .swiper-button-next',
+            prevEl: '.gallery-swiper .swiper-button-prev',
         },
         pagination: {
-            el: '.swiper-pagination',
+            el: '.gallery-swiper .swiper-pagination',
+            clickable: true,
+        },
+    });
+
+    // ─────────────────────────────────────────────
+    // 6b. SWIPER — Coverflow Reels
+    // ─────────────────────────────────────────────
+    new Swiper('.reels-swiper', {
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        loop: true,
+        coverflowEffect: {
+            rotate: 20,
+            stretch: 30,
+            depth: 250,
+            modifier: 1,
+            slideShadows: true,
+        },
+        navigation: {
+            nextEl: '.reels-swiper .swiper-button-next',
+            prevEl: '.reels-swiper .swiper-button-prev',
+        },
+        pagination: {
+            el: '.reels-swiper .swiper-pagination',
             clickable: true,
         },
     });

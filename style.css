@@ -626,7 +626,9 @@ body.ready .cursor {
 }
 
 .gallery-swiper .swiper-slide-active .slide-label,
-.gallery-swiper .swiper-slide:hover .slide-label {
+.gallery-swiper .swiper-slide:hover .slide-label,
+.reels-swiper .swiper-slide-active .slide-label,
+.reels-swiper .swiper-slide:hover .slide-label {
     opacity: 1;
     transform: translateY(0);
 }
@@ -721,39 +723,43 @@ body.ready .cursor {
 /* 11b. CINEMATIC REELS SECTION */
 .video-reels-section {
     background: var(--bg-dark);
-    padding: 70px 0;
+    padding: 70px 0 100px;
     position: relative;
     border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
-.reels-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+.video-reels-section .container {
+    margin-bottom: 40px;
 }
 
-.reel-card {
-    border-radius: 12px;
+/* Reels Swiper — portrait slides matching gallery style */
+.reels-swiper {
+    width: 100%;
+    padding: 20px 0 60px;
+}
+
+.reels-swiper .swiper-slide {
+    width: 260px;
+    height: 460px;
+    border-radius: 16px;
     overflow: hidden;
     position: relative;
-    cursor: pointer;
-    aspect-ratio: 3/4;
+    cursor: grab;
     background: #000;
 }
 
-.reel-card:hover {
-    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
-}
+.reels-swiper .swiper-slide:active { cursor: grabbing; }
 
-.hover-reel {
+.reel-card .hover-reel {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.6s ease;
+    display: block;
+    pointer-events: none;
 }
 
-.reel-card:hover .hover-reel {
+.reels-swiper .swiper-slide:hover .hover-reel {
     transform: scale(1.05);
 }
 
@@ -768,7 +774,7 @@ body.ready .cursor {
     pointer-events: none;
 }
 
-.reel-card:hover .reel-overlay {
+.reels-swiper .swiper-slide:hover .reel-overlay {
     opacity: 0;
 }
 
@@ -783,8 +789,15 @@ body.ready .cursor {
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding-left: 5px; /* offset play triangle slightly to center */
+    border: 1px solid rgba(201,169,110,0.4);
+    padding-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .reels-swiper .swiper-slide {
+        width: 200px;
+        height: 360px;
+    }
 }
 
 /* 12. SERVICES GRID — Full height image card with hover overlay text */
