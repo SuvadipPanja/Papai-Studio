@@ -1,0 +1,13 @@
+# Papai Studio — robots.txt
+# https://papaistudio.vercel.app
+
+User-agent: *
+Allow: /
+
+# Sitemap location — submit this URL to Google Search Console
+Sitemap: https://papaistudio.vercel.app/sitemap.xml
+
+# Block crawlers from accessing internal build/dev assets
+Disallow: /node_modules/
+Disallow: /dist/
+Disallow: /.git/
