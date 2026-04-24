@@ -2,3 +2,9 @@ node_modules
 dist
 .DS_Store
 *.local
+
+# Large original video files (use _web compressed versions instead)
+Data/km_20260423_1080p_60f_20260423_175727.mp4
+Data/km_20260423_1080p_60f_20260423_175428.mp4
+Data/km_20260423_1080p_60f_20260423_175909.mp4
+Data/km_20260423_1080p_60f_20260423_180033.mp4
