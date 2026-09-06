@@ -253,6 +253,19 @@ gsap.from('.statement-text', {
     }
 });
 
+// Editorial Offer Card Reveal
+gsap.from('.editorial-offer-card', {
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    ease: 'power3.out',
+    scrollTrigger: {
+        trigger: '.editorial-offer-section',
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+    }
+});
+
 // Section headings
 gsap.utils.toArray('.section-heading, .section-label').forEach(el => {
     gsap.from(el, {
