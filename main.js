@@ -131,11 +131,11 @@ if (typeof Swiper !== 'undefined') {
         slidesPerView: 'auto',
         loop: true,
         coverflowEffect: {
-            rotate: 15,
-            stretch: 20,
-            depth: 160,
+            rotate: 20,
+            stretch: 30,
+            depth: 250,
             modifier: 1,
-            slideShadows: false, // Disabling artificial SVG shadows prevents massive GPU frame drops
+            slideShadows: true,
         },
         autoplay: {
             delay: 3500,
@@ -161,11 +161,11 @@ if (typeof Swiper !== 'undefined') {
         slidesPerView: 'auto',
         loop: true,
         coverflowEffect: {
-            rotate: 15,
-            stretch: 20,
-            depth: 160,
+            rotate: 20,
+            stretch: 30,
+            depth: 250,
             modifier: 1,
-            slideShadows: false, // Disabling artificial SVG shadows prevents massive GPU frame drops
+            slideShadows: true,
         },
         navigation: {
             nextEl: '.reels-swiper .swiper-button-next',
@@ -323,147 +323,22 @@ ScrollTrigger.create({
 });
 
 // ─────────────────────────────────────────────
-// 10. VIDEO REEL INTERACTION LOGIC & 9:16 ENHANCEMENTS
+// 10. VIDEO REEL INTERACTION LOGIC
 // ─────────────────────────────────────────────
-window.toggleReelSound = function(event, btn) {
-    if (event) event.stopPropagation();
-    const card = btn.closest('.reel-card');
-    const video = card.querySelector('video');
-    if (!video) return;
-
-    video.muted = !video.muted;
-    const icon = btn.querySelector('span');
-    if (icon) {
-        icon.textContent = video.muted ? '🔇' : '🔊';
-    }
-};
-
-window.toggleReelLike = function(event, btn) {
-    if (event) event.stopPropagation();
-    btn.classList.toggle('liked');
-    const countEl = btn.querySelector('.action-count');
-    if (countEl) {
-        let current = parseFloat(countEl.textContent);
-        if (btn.classList.contains('liked')) {
-            countEl.textContent = (current + 0.1).toFixed(1) + 'k';
-        } else {
-            countEl.textContent = Math.max(1.0, current - 0.1).toFixed(1) + 'k';
-        }
-    }
-};
-
-// Fullscreen Cinema Modal
-const cinemaModal = document.getElementById('cinemaModal');
-const cinemaModalVideo = document.getElementById('cinemaModalVideo');
-const cinemaModalTitle = document.getElementById('cinemaModalTitle');
-const cinemaModalWhatsappBtn = document.getElementById('cinemaModalWhatsappBtn');
-
-window.openCinemaModalFromCard = function(event, el) {
-    if (event) event.stopPropagation();
-    const card = el.closest('.reel-card');
-    if (!card) return;
-
-    const sourceVideo = card.querySelector('video');
-    // Extract the real compiled URL already loaded in the DOM video!
-    const videoSrc = sourceVideo ? (sourceVideo.currentSrc || sourceVideo.src) : card.getAttribute('data-video');
-    const title = card.getAttribute('data-title') || 'Cinematic Reel';
-
-    if (cinemaModalVideo) {
-        cinemaModalVideo.src = videoSrc;
-        cinemaModalVideo.currentTime = sourceVideo ? sourceVideo.currentTime : 0;
-        cinemaModalVideo.muted = false;
-
-        const soundIcon = document.getElementById('cinemaSoundIcon');
-        if (soundIcon) soundIcon.textContent = '🔊';
-
-        const playOverlay = document.getElementById('cinemaPlayOverlay');
-        if (playOverlay) playOverlay.classList.remove('paused');
-
-        cinemaModalVideo.play().catch(() => {
-            // If browser autoplay policy blocks sound, play muted and let user unmute
-            cinemaModalVideo.muted = true;
-            if (soundIcon) soundIcon.textContent = '🔇';
-            cinemaModalVideo.play().catch(e => console.error("Cinema play failed:", e));
+// The swiper on:slideChange handles basic play/pause.
+// This adds click-to-unmute and ensures smooth interaction.
+document.querySelectorAll('.hover-reel').forEach(video => {
+    const parentSlide = video.closest('.swiper-slide');
+    
+    // Toggle mute on click if it's the active slide
+    if (parentSlide) {
+        parentSlide.addEventListener('click', () => {
+            if (parentSlide.classList.contains('swiper-slide-active')) {
+                video.muted = !video.muted;
+            }
         });
     }
-
-    if (cinemaModalTitle) {
-        cinemaModalTitle.textContent = title;
-    }
-
-    if (cinemaModalWhatsappBtn) {
-        const msg = encodeURIComponent(`Hi Papai Studio! I watched your cinematic reel "${title}" on your website and would love to book a similar cinematic film for my wedding. Is my date available?`);
-        cinemaModalWhatsappBtn.href = `https://wa.me/917001192076?text=${msg}`;
-    }
-
-    if (cinemaModal) {
-        cinemaModal.classList.add('active');
-        lenis.stop();
-    }
-};
-
-window.toggleCinemaModalPlay = function(event) {
-    if (event) event.stopPropagation();
-    if (!cinemaModalVideo) return;
-    const playOverlay = document.getElementById('cinemaPlayOverlay');
-
-    if (cinemaModalVideo.paused) {
-        cinemaModalVideo.play();
-        if (playOverlay) playOverlay.classList.remove('paused');
-    } else {
-        cinemaModalVideo.pause();
-        if (playOverlay) playOverlay.classList.add('paused');
-    }
-};
-
-window.toggleCinemaModalSound = function(event) {
-    if (event) event.stopPropagation();
-    if (!cinemaModalVideo) return;
-    cinemaModalVideo.muted = !cinemaModalVideo.muted;
-    const soundIcon = document.getElementById('cinemaSoundIcon');
-    if (soundIcon) {
-        soundIcon.textContent = cinemaModalVideo.muted ? '🔇' : '🔊';
-    }
-};
-
-window.closeCinemaModal = function() {
-    if (cinemaModal) {
-        cinemaModal.classList.remove('active');
-    }
-    if (cinemaModalVideo) {
-        cinemaModalVideo.pause();
-        cinemaModalVideo.removeAttribute('src');
-    }
-    lenis.start();
-};
-
-if (cinemaModal) {
-    cinemaModal.addEventListener('click', (e) => {
-        if (e.target === cinemaModal) {
-            window.closeCinemaModal();
-        }
-    });
-}
-
-if (cinemaModalVideo) {
-    cinemaModalVideo.addEventListener('timeupdate', () => {
-        const progressFill = document.getElementById('cinemaProgressFill');
-        if (progressFill && cinemaModalVideo.duration) {
-            const pct = (cinemaModalVideo.currentTime / cinemaModalVideo.duration) * 100;
-            progressFill.style.width = pct + '%';
-        }
-    });
-
-    cinemaModalVideo.addEventListener('play', () => {
-        const playOverlay = document.getElementById('cinemaPlayOverlay');
-        if (playOverlay) playOverlay.classList.remove('paused');
-    });
-
-    cinemaModalVideo.addEventListener('pause', () => {
-        const playOverlay = document.getElementById('cinemaPlayOverlay');
-        if (playOverlay) playOverlay.classList.add('paused');
-    });
-}
+});
 
 // ─────────────────────────────────────────────
 // 11. THE ART OF RETOUCHING: BEFORE & AFTER SLIDER
