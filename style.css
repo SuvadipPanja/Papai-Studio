@@ -188,33 +188,29 @@ body {
     left: 0;
     right: 0;
     z-index: 9999;
-    padding: 10px 32px;
+    padding: 8px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     mix-blend-mode: normal;
-    transition: padding 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+    transition: padding 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
     transform: translateZ(0);
 }
 
 .header.scrolled {
-    background: rgba(7, 7, 7, 0.96);
-    padding: 8px 32px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    background: rgba(7, 7, 7, 0.95);
+    padding: 6px 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
 }
 
 .header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(7,7,7,0.45) 0%, transparent 100%);
-    pointer-events: none;
+    display: none;
 }
 
 .nav-logo {
-    width: 48px;
+    width: 40px;
     position: relative;
-    filter: drop-shadow(0 2px 8px rgba(201,169,110,0.35));
+    filter: drop-shadow(0 2px 6px rgba(201,169,110,0.35));
     transition: var(--transition);
 }
 
@@ -228,14 +224,14 @@ body {
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    padding: 5px;
+    gap: 4px;
+    padding: 4px;
     z-index: 1;
 }
 
 .menu-btn span {
     display: block;
-    width: 28px;
+    width: 24px;
     height: 2px;
     background: var(--text-light);
     transition: var(--transition);
@@ -1572,12 +1568,9 @@ body {
 /* 21. MOBILE HEADER */
 @media (max-width: 768px) {
     .header {
-        padding: 8px 16px;
+        padding: 6px 14px;
     }
-    .header-live-pill {
-        display: none;
-    }
-    .nav-logo { width: 42px; }
+    .nav-logo { width: 34px; }
     .reviews-slider {
         padding: 0;
         gap: 20px;
