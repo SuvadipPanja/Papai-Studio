@@ -9,12 +9,15 @@ import haldiPresetImg from './Data/retouch_haldi.jpg';
 gsap.registerPlugin(ScrollTrigger);
 
 // ─────────────────────────────────────────────
-// 1. SMOOTH SCROLL (Lenis)
+// 1. SMOOTH SCROLL (Lenis — Optimized 60-120fps)
 // ─────────────────────────────────────────────
 const lenis = new Lenis({
-    duration: 1.4,
+    duration: 0.85, // Snappy & silky-smooth response, eliminates the sluggish floaty delay
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothTouch: false,
+    smoothWheel: true,
+    wheelMultiplier: 1.0,
+    touchMultiplier: 1.2,
+    infinite: false,
 });
 
 lenis.on('scroll', ScrollTrigger.update);
@@ -22,7 +25,7 @@ lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
 });
-gsap.ticker.lagSmoothing(0);
+gsap.ticker.lagSmoothing(500, 33);
 
 // ─────────────────────────────────────────────
 // 2. NAVIGATION OVERLAY
@@ -128,11 +131,11 @@ if (typeof Swiper !== 'undefined') {
         slidesPerView: 'auto',
         loop: true,
         coverflowEffect: {
-            rotate: 20,
-            stretch: 30,
-            depth: 250,
+            rotate: 15,
+            stretch: 20,
+            depth: 160,
             modifier: 1,
-            slideShadows: true,
+            slideShadows: false, // Disabling artificial SVG shadows prevents massive GPU frame drops
         },
         autoplay: {
             delay: 3500,
@@ -158,11 +161,11 @@ if (typeof Swiper !== 'undefined') {
         slidesPerView: 'auto',
         loop: true,
         coverflowEffect: {
-            rotate: 20,
-            stretch: 30,
-            depth: 250,
+            rotate: 15,
+            stretch: 20,
+            depth: 160,
             modifier: 1,
-            slideShadows: true,
+            slideShadows: false, // Disabling artificial SVG shadows prevents massive GPU frame drops
         },
         navigation: {
             nextEl: '.reels-swiper .swiper-button-next',
@@ -307,18 +310,15 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ─────────────────────────────────────────────
-// 9. HEADER SHRINK ON SCROLL
+// 9. HEADER SHRINK ON SCROLL (Zero reflow / GPU-accelerated)
 // ─────────────────────────────────────────────
 const header = document.getElementById('header');
 ScrollTrigger.create({
     start: 'top -80px',
     onUpdate: (self) => {
-        header.style.background = self.progress > 0
-            ? 'rgba(7,7,7,0.95)'
-            : 'transparent';
-        header.style.backdropFilter = self.progress > 0 ? 'blur(10px)' : 'none';
-        header.style.padding = self.progress > 0 ? '15px 40px' : '25px 40px';
-        header.style.transition = 'all 0.4s ease';
+        if (header) {
+            header.classList.toggle('scrolled', self.progress > 0);
+        }
     }
 });
 
