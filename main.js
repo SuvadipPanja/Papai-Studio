@@ -2,9 +2,9 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
-import bridalPresetImg from './Data/SP0_2400.jpg.jpeg';
-import sindoorPresetImg from './Data/SP0_2423.jpg.jpeg';
-import haldiPresetImg from './Data/haldi.png';
+import bridalPresetImg from './Data/retouch_bridal.jpg';
+import sindoorPresetImg from './Data/retouch_sindoor.jpg';
+import haldiPresetImg from './Data/retouch_haldi.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -521,7 +521,10 @@ const comparisonStage = document.getElementById('comparisonStage');
 
 function setSliderPosition(val) {
     const clamped = Math.max(0, Math.min(100, val));
-    if (beforeLayer) beforeLayer.style.width = clamped + '%';
+    if (beforeLayer) {
+        beforeLayer.style.clipPath = `inset(0 ${100 - clamped}% 0 0)`;
+        beforeLayer.style.webkitClipPath = `inset(0 ${100 - clamped}% 0 0)`;
+    }
     if (dividerHandle) dividerHandle.style.left = clamped + '%';
     if (comparisonRange) comparisonRange.value = clamped;
 }
@@ -576,15 +579,9 @@ window.switchRetouchPreset = function(presetKey) {
     const afterImg = document.getElementById('afterImg');
 
     if (beforeImg && afterImg) {
-        gsap.to([beforeImg, afterImg], {
-            opacity: 0,
-            duration: 0.25,
-            onComplete: () => {
-                beforeImg.src = preset.img;
-                afterImg.src = preset.img;
-                gsap.to([beforeImg, afterImg], { opacity: 1, duration: 0.35 });
-            }
-        });
+        // Direct assignment with fast crossfade
+        beforeImg.src = preset.img;
+        afterImg.src = preset.img;
     }
 
     const camTitle = document.getElementById('captionCamTitle');
@@ -601,13 +598,11 @@ window.switchRetouchPreset = function(presetKey) {
     if (retouchTitle) retouchTitle.textContent = preset.retouchTitle;
     if (retouchDesc) retouchDesc.textContent = preset.retouchDesc;
 
-    // Reset slider to center with a smooth bounce
-    gsap.to({ val: 50 }, {
-        val: 50,
-        duration: 0.4,
-        onUpdate: function() { setSliderPosition(50); }
-    });
+    setSliderPosition(50);
 };
+
+// Initialize slider position
+setSliderPosition(50);
 
 // ─────────────────────────────────────────────
 // 12. INTERACTIVE WEDDING PACKAGE & QUOTE ESTIMATOR

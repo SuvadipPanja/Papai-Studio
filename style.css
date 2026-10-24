@@ -2222,20 +2222,34 @@ body.ready .cursor {
 
 /* The RAW unedited layer simulation */
 .comparison-before {
-    width: 50%; /* driven dynamically via --pos */
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     z-index: 2;
-    border-right: 2px solid var(--gold);
-    background: #000;
+    clip-path: inset(0 50% 0 0);
+    -webkit-clip-path: inset(0 50% 0 0);
+    pointer-events: none;
 }
 
 .comparison-before img {
-    width: 980px; /* Locked to match container width */
-    max-width: none;
-    filter: saturate(0.6) contrast(0.88) brightness(1.08) sepia(0.05);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.55) contrast(0.88) brightness(1.08) sepia(0.05);
 }
 
 /* The Cinematic Master layer */
 .comparison-after img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     filter: saturate(1.15) contrast(1.08) brightness(1.02);
 }
 
@@ -2295,10 +2309,12 @@ body.ready .cursor {
     top: 0;
     bottom: 0;
     left: 50%; /* driven dynamically via JS */
-    width: 0;
+    width: 2px;
+    background: var(--gold-gradient);
     z-index: 10;
     pointer-events: none;
     transform: translateX(-50%);
+    box-shadow: 0 0 12px rgba(201, 169, 110, 0.85);
 }
 
 .divider-button {
