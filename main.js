@@ -25,53 +25,7 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0);
 
 // ─────────────────────────────────────────────
-// 2. CUSTOM CURSOR (desktop only)
-// ─────────────────────────────────────────────
-const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
-const cursor = document.getElementById('cursor');
-
-if (cursor && !isMobile()) {
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let cursorX = mouseX;
-    let cursorY = mouseY;
-
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-
-    // Smooth lagged cursor — camera shoulder = hotspot
-    // SVG width=28. Top-left of camera translates to roughly 4,8
-    function tickCursor() {
-        cursorX += (mouseX - cursorX) * 0.15;
-        cursorY += (mouseY - cursorY) * 0.15;
-        // Use transform for GPU compositing
-        cursor.style.transform = `translate(${cursorX - 4}px, ${cursorY - 8}px)`;
-        requestAnimationFrame(tickCursor);
-    }
-    // Remove the margin offset from CSS since we handle it here
-    cursor.style.marginLeft = '0';
-    cursor.style.marginTop  = '0';
-    tickCursor();
-
-    // Cursor hover states
-    document.addEventListener('mouseover', (e) => {
-        const t = e.target.closest('a, button, .service-card, .blog-card, .tip-card, .review-card, .magnetic-btn, [onclick]');
-        if (t) cursor.classList.add('hovered');
-    });
-
-    document.addEventListener('mouseout', (e) => {
-        const t = e.target.closest('a, button, .service-card, .blog-card, .tip-card, .review-card, .magnetic-btn, [onclick]');
-        if (t) cursor.classList.remove('hovered');
-    });
-
-    document.addEventListener('mousedown', () => cursor.classList.add('clicked'));
-    document.addEventListener('mouseup', () => cursor.classList.remove('clicked'));
-}
-
-// ─────────────────────────────────────────────
-// 3. NAVIGATION OVERLAY
+// 2. NAVIGATION OVERLAY
 // ─────────────────────────────────────────────
 const menuBtn = document.getElementById('menuBtn');
 const navOverlay = document.getElementById('navOverlay');
