@@ -365,37 +365,392 @@ ScrollTrigger.create({
 });
 
 // ─────────────────────────────────────────────
-// 10. VIDEO REEL INTERACTION LOGIC
+// 10. VIDEO REEL INTERACTION LOGIC & 9:16 ENHANCEMENTS
 // ─────────────────────────────────────────────
-// The swiper on:slideChange handles basic play/pause.
-// This adds click-to-unmute and ensures smooth interaction.
-document.querySelectorAll('.hover-reel').forEach(video => {
-    const parentSlide = video.closest('.swiper-slide');
-    
-    // Toggle mute on click if it's the active slide
-    parentSlide.addEventListener('click', () => {
-        if (parentSlide.classList.contains('swiper-slide-active')) {
-            video.muted = !video.muted;
-            // Visual feedback could be added here if needed
+window.toggleReelSound = function(event, btn) {
+    if (event) event.stopPropagation();
+    const card = btn.closest('.reel-card');
+    const video = card.querySelector('video');
+    if (!video) return;
+
+    video.muted = !video.muted;
+    const icon = btn.querySelector('span');
+    if (icon) {
+        icon.textContent = video.muted ? '🔇' : '🔊';
+    }
+};
+
+window.toggleReelLike = function(event, btn) {
+    if (event) event.stopPropagation();
+    btn.classList.toggle('liked');
+    const countEl = btn.querySelector('.action-count');
+    if (countEl) {
+        let current = parseFloat(countEl.textContent);
+        if (btn.classList.contains('liked')) {
+            countEl.textContent = (current + 0.1).toFixed(1) + 'k';
+        } else {
+            countEl.textContent = Math.max(1.0, current - 0.1).toFixed(1) + 'k';
+        }
+    }
+};
+
+// Fullscreen Cinema Modal
+const cinemaModal = document.getElementById('cinemaModal');
+const cinemaModalVideo = document.getElementById('cinemaModalVideo');
+const cinemaModalTitle = document.getElementById('cinemaModalTitle');
+const cinemaModalWhatsappBtn = document.getElementById('cinemaModalWhatsappBtn');
+
+window.openCinemaModalFromCard = function(event, el) {
+    if (event) event.stopPropagation();
+    const card = el.closest('.reel-card');
+    if (!card) return;
+
+    const videoSrc = card.getAttribute('data-video');
+    const title = card.getAttribute('data-title') || 'Cinematic Reel';
+
+    if (cinemaModalVideo) {
+        cinemaModalVideo.src = videoSrc;
+        cinemaModalVideo.currentTime = 0;
+        cinemaModalVideo.muted = false;
+        cinemaModalVideo.play().catch(() => {
+            cinemaModalVideo.muted = true;
+            cinemaModalVideo.play();
+        });
+    }
+
+    if (cinemaModalTitle) {
+        cinemaModalTitle.textContent = title;
+    }
+
+    if (cinemaModalWhatsappBtn) {
+        const msg = encodeURIComponent(`Hi Papai Studio! I watched your cinematic reel "${title}" on your website and would love to book a similar cinematic film for my wedding. Is my date available?`);
+        cinemaModalWhatsappBtn.href = `https://wa.me/917001192076?text=${msg}`;
+    }
+
+    if (cinemaModal) {
+        cinemaModal.classList.add('active');
+        lenis.stop();
+    }
+};
+
+window.closeCinemaModal = function() {
+    if (cinemaModal) {
+        cinemaModal.classList.remove('active');
+    }
+    if (cinemaModalVideo) {
+        cinemaModalVideo.pause();
+        cinemaModalVideo.removeAttribute('src');
+    }
+    lenis.start();
+};
+
+if (cinemaModal) {
+    cinemaModal.addEventListener('click', (e) => {
+        if (e.target === cinemaModal) {
+            window.closeCinemaModal();
         }
     });
-});
+}
 
 // ─────────────────────────────────────────────
-// 11. HERO VIDEO AUDIO CONTROLS (Low Volume setup)
+// 11. THE ART OF RETOUCHING: BEFORE & AFTER SLIDER
+// ─────────────────────────────────────────────
+const comparisonRange = document.getElementById('comparisonRange');
+const beforeLayer = document.getElementById('beforeLayer');
+const dividerHandle = document.getElementById('dividerHandle');
+const comparisonStage = document.getElementById('comparisonStage');
+
+function setSliderPosition(val) {
+    const clamped = Math.max(0, Math.min(100, val));
+    if (beforeLayer) beforeLayer.style.width = clamped + '%';
+    if (dividerHandle) dividerHandle.style.left = clamped + '%';
+    if (comparisonRange) comparisonRange.value = clamped;
+}
+
+if (comparisonRange) {
+    comparisonRange.addEventListener('input', (e) => {
+        setSliderPosition(e.target.value);
+    });
+}
+
+// Retouch Presets
+const retouchPresets = {
+    bridal: {
+        img: './Data/SP0_2400.jpg.jpeg',
+        camTitle: 'Nikon Z6 II · 85mm Prime',
+        camDesc: 'Full-Frame Sensor RAW • Uncompressed 14-Bit Color Profile',
+        gradeTitle: 'Papai Signature 3D LUT',
+        gradeDesc: 'Warm Bengali Wedding Skin Tones & Deep Crimson Depth',
+        retouchTitle: 'Editorial Retouching',
+        retouchDesc: 'Frequency Separation + Natural Skin Texture Preservation'
+    },
+    sindoor: {
+        img: './Data/SP0_2423.jpg.jpeg',
+        camTitle: 'Nikon Z8 · 35mm f/1.4 S',
+        camDesc: 'High Dynamic Range Mandap Sensor RAW Capture',
+        gradeTitle: 'Royal Alta & Gold LUT',
+        gradeDesc: 'Preservation of Alta Reds & Golden Mukut Highlights',
+        retouchTitle: 'Highlight Recovery',
+        retouchDesc: 'Specular Glare Reduction & Cinematic Film Halation'
+    },
+    haldi: {
+        img: './Data/haldi.png',
+        camTitle: 'Nikon Z6 II · 24-70mm f/2.8 S',
+        camDesc: 'High-Speed 1/1000s RAW Splash Capture',
+        gradeTitle: 'Solar Turmeric Glow',
+        gradeDesc: 'Vibrant Yellow Separation & Warm Ambient Sunlight',
+        retouchTitle: 'Clarity & Droplet Pop',
+        retouchDesc: 'Micro-Contrast Enhancement on Turmeric & Petals'
+    }
+};
+
+window.switchRetouchPreset = function(presetKey) {
+    const preset = retouchPresets[presetKey];
+    if (!preset) return;
+
+    // Update active tab styling
+    document.querySelectorAll('.retouch-tab').forEach(tab => {
+        tab.classList.toggle('active', tab.getAttribute('data-preset') === presetKey);
+    });
+
+    const beforeImg = document.getElementById('beforeImg');
+    const afterImg = document.getElementById('afterImg');
+
+    if (beforeImg && afterImg) {
+        gsap.to([beforeImg, afterImg], {
+            opacity: 0,
+            duration: 0.25,
+            onComplete: () => {
+                beforeImg.src = preset.img;
+                afterImg.src = preset.img;
+                gsap.to([beforeImg, afterImg], { opacity: 1, duration: 0.35 });
+            }
+        });
+    }
+
+    const camTitle = document.getElementById('captionCamTitle');
+    const camDesc = document.getElementById('captionCamDesc');
+    const gradeTitle = document.getElementById('captionGradeTitle');
+    const gradeDesc = document.getElementById('captionGradeDesc');
+    const retouchTitle = document.getElementById('captionRetouchTitle');
+    const retouchDesc = document.getElementById('captionRetouchDesc');
+
+    if (camTitle) camTitle.textContent = preset.camTitle;
+    if (camDesc) camDesc.textContent = preset.camDesc;
+    if (gradeTitle) gradeTitle.textContent = preset.gradeTitle;
+    if (gradeDesc) gradeDesc.textContent = preset.gradeDesc;
+    if (retouchTitle) retouchTitle.textContent = preset.retouchTitle;
+    if (retouchDesc) retouchDesc.textContent = preset.retouchDesc;
+
+    // Reset slider to center with a smooth bounce
+    gsap.to({ val: 50 }, {
+        val: 50,
+        duration: 0.4,
+        onUpdate: function() { setSliderPosition(50); }
+    });
+};
+
+// ─────────────────────────────────────────────
+// 12. INTERACTIVE WEDDING PACKAGE & QUOTE ESTIMATOR
+// ─────────────────────────────────────────────
+let estimatorState = {
+    celebration: { type: 'wedding', title: 'Full Bengali Wedding', base: 55000 },
+    duration: { days: '1', title: '1 Day Grand Coverage', mult: 1.0 },
+    addons: {
+        drone: { name: '4K Aerial Drone Coverage', price: 8000, active: true },
+        reels: { name: '3× Instagram Cinematic Reels', price: 6000, active: true },
+        album: { name: '40-Page Velvet Photobook', price: 10000, active: false },
+        ssd: { name: 'Raw Footage & Flash Drive', price: 3500, active: false }
+    },
+    eventDate: ''
+};
+
+window.selectCelebration = function(btn) {
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+
+    estimatorState.celebration = {
+        type: btn.getAttribute('data-type'),
+        title: btn.getAttribute('data-title'),
+        base: parseInt(btn.getAttribute('data-base'), 10)
+    };
+    window.updateEstimatedQuote();
+};
+
+window.selectDuration = function(btn) {
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+
+    estimatorState.duration = {
+        days: btn.getAttribute('data-days'),
+        title: btn.getAttribute('data-title'),
+        mult: parseFloat(btn.getAttribute('data-mult'))
+    };
+    window.updateEstimatedQuote();
+};
+
+window.toggleAddon = function(card) {
+    const addonKey = card.getAttribute('data-addon');
+    if (!estimatorState.addons[addonKey]) return;
+
+    const isActive = !estimatorState.addons[addonKey].active;
+    estimatorState.addons[addonKey].active = isActive;
+
+    card.classList.toggle('active', isActive);
+    const checkbox = card.querySelector('.custom-checkbox');
+    if (checkbox) checkbox.textContent = isActive ? '✓' : '';
+
+    window.updateEstimatedQuote();
+};
+
+window.updateEstimatedQuote = function() {
+    const dateInput = document.getElementById('eventDateInput');
+    if (dateInput) {
+        estimatorState.eventDate = dateInput.value;
+    }
+
+    // Calculation: Base * Mult + Active Addons
+    const baseTotal = estimatorState.celebration.base * estimatorState.duration.mult;
+    let addonsTotal = 0;
+    const activeAddonsList = [];
+
+    Object.keys(estimatorState.addons).forEach(key => {
+        const item = estimatorState.addons[key];
+        if (item.active) {
+            addonsTotal += item.price;
+            activeAddonsList.push(item.name);
+        }
+    });
+
+    const finalEstimate = Math.round((baseTotal + addonsTotal) / 1000) * 1000;
+    const formattedPrice = '₹' + finalEstimate.toLocaleString('en-IN');
+
+    const priceDisplay = document.getElementById('quotePriceText');
+    if (priceDisplay) {
+        priceDisplay.textContent = formattedPrice;
+    }
+
+    // Inclusions List update
+    const inclusionsUl = document.getElementById('quoteInclusionsList');
+    if (inclusionsUl) {
+        let html = `
+            <li><span>✓</span> <strong>${estimatorState.celebration.title}</strong> (${estimatorState.duration.title})</li>
+            <li><span>✓</span> Dual Full-Frame Nikon Bodies (Z6 II &amp; Z8)</li>
+            <li><span>✓</span> Master Colour Grading &amp; Skin Retouching</li>
+        `;
+        activeAddonsList.forEach(name => {
+            html += `<li><span>✓</span> ${name}</li>`;
+        });
+        html += `<li><span>✓</span> Private Online Cloud Archive</li>`;
+        inclusionsUl.innerHTML = html;
+    }
+
+    // WhatsApp dynamic booking link
+    const whatsappBtn = document.getElementById('quoteWhatsappBtn');
+    if (whatsappBtn) {
+        let datePart = estimatorState.eventDate ? ` around ${estimatorState.eventDate}` : '';
+        let addonsPart = activeAddonsList.length > 0 ? ` with ${activeAddonsList.join(', ')}` : '';
+        const msg = encodeURIComponent(
+            `Hi Papai Studio! I customized a package on your website for ${estimatorState.celebration.title} (${estimatorState.duration.title})${addonsPart}${datePart}. ` +
+            `Estimated tariff shown is ${formattedPrice}. Could you please check date availability and share the detailed itinerary?`
+        );
+        whatsappBtn.href = `https://wa.me/917001192076?text=${msg}`;
+    }
+};
+
+// Initialize Quote Calculation
+setTimeout(() => {
+    if (document.getElementById('quote-calculator')) {
+        window.updateEstimatedQuote();
+    }
+}, 300);
+
+// ─────────────────────────────────────────────
+// 13. AMBIENT AUDIO CONTROLLER (Web Audio Synthesizer)
+// ─────────────────────────────────────────────
+const ambientAudioBtn = document.getElementById('ambientAudioBtn');
+const audioStatusText = document.getElementById('audioStatusText');
+let audioCtx = null;
+let ambientOscillators = [];
+let isAudioPlaying = false;
+
+function toggleAmbientSoundscape() {
+    if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+    }
+
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+
+    if (isAudioPlaying) {
+        // Stop audio
+        ambientOscillators.forEach(osc => {
+            try {
+                osc.gainNode.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.6);
+                setTimeout(() => osc.stop(), 700);
+            } catch (e) {}
+        });
+        ambientOscillators = [];
+        isAudioPlaying = false;
+        if (ambientAudioBtn) ambientAudioBtn.classList.remove('playing');
+        if (audioStatusText) audioStatusText.textContent = 'Atmosphere';
+    } else {
+        // Start warm Bengali wedding ambient chord (D - F# - A - D warm harmonic acoustic pad)
+        const freqs = [146.83, 220.00, 277.18, 369.99, 440.00]; // D3, A3, C#4, F#4, A4
+        const masterGain = audioCtx.createGain();
+        masterGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+        masterGain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 1.2);
+        masterGain.connect(audioCtx.destination);
+
+        ambientOscillators = freqs.map((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+            // Subtle slow acoustic modulation
+            const lfo = audioCtx.createOscillator();
+            const lfoGain = audioCtx.createGain();
+            lfo.frequency.setValueAtTime(0.2 + idx * 0.05, audioCtx.currentTime);
+            lfoGain.gain.setValueAtTime(1.5, audioCtx.currentTime);
+            lfo.connect(lfoGain);
+            lfoGain.connect(osc.frequency);
+            lfo.start();
+
+            gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+            osc.connect(gain);
+            gain.connect(masterGain);
+            osc.gainNode = masterGain;
+            osc.start();
+            return osc;
+        });
+
+        isAudioPlaying = true;
+        if (ambientAudioBtn) ambientAudioBtn.classList.add('playing');
+        if (audioStatusText) audioStatusText.textContent = 'Playing ♫';
+    }
+}
+
+if (ambientAudioBtn) {
+    ambientAudioBtn.addEventListener('click', toggleAmbientSoundscape);
+}
+
+// ─────────────────────────────────────────────
+// 14. HERO VIDEO AUDIO CONTROLS (Low Volume setup)
 // ─────────────────────────────────────────────
 if (heroVideo) {
-    heroVideo.volume = 0.15; // Play with low sound
-    
+    heroVideo.volume = 0.15;
     const attemptPlayVideo = () => {
         heroVideo.muted = false;
         let playPromise = heroVideo.play();
         if (playPromise !== undefined) {
-            playPromise.catch(error => {
-                // Autoplay blocked by browser policy. Play muted visually, then unmute on interaction.
+            playPromise.catch(() => {
                 heroVideo.muted = true;
-                heroVideo.play().catch(e => console.log('Muted fallback failed:', e));
-                
+                heroVideo.play().catch(() => {});
                 const unmuteOnInteract = () => {
                     heroVideo.muted = false;
                     heroVideo.volume = 0.15;
@@ -403,13 +758,11 @@ if (heroVideo) {
                         document.removeEventListener(evt, unmuteOnInteract);
                     });
                 };
-                
                 ['click', 'touchstart', 'scroll'].forEach(evt => {
                     document.addEventListener(evt, unmuteOnInteract, { once: true });
                 });
             });
         }
     };
-    
     setTimeout(attemptPlayVideo, 100);
 }

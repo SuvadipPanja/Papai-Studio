@@ -130,9 +130,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Oswald:wght@200;400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-  <script type="module" crossorigin src="/assets/index-s0VJi0DU.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-Dflo2k6D.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <script type="module" crossorigin src="/assets/index-Cmi7hYvk.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DN2bNMOV.css">
 </head>
 <body>
 
@@ -210,6 +210,20 @@
         <div class="logo">
             <img src="/assets/6-C5f34AlC.png" alt="Papai Studio" class="nav-logo">
         </div>
+        <div class="header-badge-wrap">
+            <div class="header-live-pill">
+                <span class="live-beacon"></span>
+                <span>Bengal Dates Open</span>
+            </div>
+            <button class="ambient-audio-toggle" id="ambientAudioBtn" aria-label="Toggle Ambient Audio">
+                <span class="audio-waves">
+                    <span class="audio-bar"></span>
+                    <span class="audio-bar"></span>
+                    <span class="audio-bar"></span>
+                </span>
+                <span id="audioStatusText">Atmosphere</span>
+            </button>
+        </div>
         <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">
             <span></span><span></span><span></span>
         </button>
@@ -220,10 +234,11 @@
         <button class="nav-close" id="navClose" aria-label="Close Menu">✕</button>
         <ul class="nav-links">
             <li><a href="#gallery" onclick="closeNav()">GALLERY</a></li>
+            <li><a href="#reels" onclick="closeNav()">CINEMATIC REELS</a></li>
+            <li><a href="#retouching" onclick="closeNav()">THE ART OF RETOUCHING</a></li>
             <li><a href="#services" onclick="closeNav()">SERVICES</a></li>
-            <li><a href="#team" onclick="closeNav()">TEAM</a></li>
+            <li><a href="#quote-calculator" onclick="closeNav()">PACKAGE ESTIMATOR</a></li>
             <li><a href="#reviews" onclick="closeNav()">REVIEWS</a></li>
-            <li><a href="#blog" onclick="closeNav()">BLOG</a></li>
             <li><a href="#contact" onclick="closeNav()">CONTACT</a></li>
             <li><a href="https://wa.me/917001192076" target="_blank" class="nav-cta" onclick="closeNav()">BOOK NOW</a></li>
         </ul>
@@ -245,6 +260,7 @@
                 <h1 class="hero-text-bg">PAPAI STUDIO</h1>
             </div>
             <div class="hero-content">
+                <p class="hero-bengali-katha">পশ্চিমবঙ্গের ঐতিহ্যবাহী বাঙালি ওয়েডিং ও সিনেমাটোগ্রাফি</p>
                 <h2 class="hero-title">
                     <span class="word">Timeless</span>
                     <span class="word">Elegance.</span>
@@ -266,10 +282,18 @@
         <!-- ================================================ -->
         <section class="statement-section">
             <div class="container">
+                <div class="bengali-kalka-badge">
+                    <span class="kalka-flourish">✦ ॐ ✦</span>
+                    <span class="bengali-heritage-title">শুভ বন্ধন · চিরন্তন স্মৃতি</span>
+                    <span class="kalka-flourish">✦ ॐ ✦</span>
+                </div>
                 <p class="statement-text">
                     WE DON'T JUST TAKE PICTURES. <br>
                     <span class="gold">WE FREEZE TIME.</span>
                 </p>
+                <div class="statement-accent-line">
+                    <span class="accent-diamond">◆</span>
+                </div>
             </div>
         </section>
 
@@ -359,6 +383,91 @@
                     <span class="editorial-expiry">
                         ⏳ Limited slots • Privilege tariff available until 23rd December
                     </span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================================ -->
+        <!-- THE ART OF RETOUCHING: BEFORE & AFTER SLIDER -->
+        <!-- ================================================ -->
+        <section class="retouch-section" id="retouching">
+            <div class="container">
+                <div class="section-badge-center">
+                    <span class="section-tag-gold">✦ THE ART OF POST-PRODUCTION ✦</span>
+                </div>
+                <h2 class="section-heading text-center">
+                    RAW SENSOR TO <span class="gold">CINEMATIC MASTERPIECE</span>
+                </h2>
+                <p class="retouch-intro text-center">
+                    Every frame delivered by Papai Studio undergoes rigorous publication-level retouching, dynamic skin-tone balance, and bespoke cinematic colour grading. Drag the slider to witness the transformation.
+                </p>
+
+                <!-- Filter Preset Switcher -->
+                <div class="retouch-tabs">
+                    <button class="retouch-tab active" data-preset="bridal" onclick="switchRetouchPreset('bridal')">
+                        <span>👰 Bridal Master Portrait</span>
+                    </button>
+                    <button class="retouch-tab" data-preset="sindoor" onclick="switchRetouchPreset('sindoor')">
+                        <span>🔥 Royal Sindoor Daan</span>
+                    </button>
+                    <button class="retouch-tab" data-preset="haldi" onclick="switchRetouchPreset('haldi')">
+                        <span>🌼 Gaye Holud Warmth</span>
+                    </button>
+                </div>
+
+                <!-- Interactive Before / After Comparison Stage -->
+                <div class="comparison-container" id="comparisonStage">
+                    <!-- Layer 1: "AFTER" (Cinematic Master) -->
+                    <div class="comparison-after">
+                        <img id="afterImg" src="/assets/SP0_2400.jpg-Cz1jYrJv.jpeg" alt="Papai Studio Master Retouching" loading="lazy">
+                        <div class="badge-grade badge-after">
+                            <span class="dot-gold"></span> PAPAI SIGNATURE CINEMATIC MASTER
+                        </div>
+                    </div>
+
+                    <!-- Layer 2: "BEFORE" (Camera Raw Profile - Clipped) -->
+                    <div class="comparison-before" id="beforeLayer">
+                        <img id="beforeImg" src="/assets/SP0_2400.jpg-Cz1jYrJv.jpeg" alt="Unedited Camera RAW" loading="lazy">
+                        <div class="badge-grade badge-before">
+                            <span class="dot-raw"></span> UNEDITED CAMERA SENSOR RAW
+                        </div>
+                    </div>
+
+                    <!-- Draggable Handle Divider -->
+                    <div class="comparison-divider" id="dividerHandle">
+                        <div class="divider-button">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 7L3 12L8 17M16 7L21 12L16 17" stroke="#070707" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Range input for touch & mouse drag -->
+                    <input type="range" min="0" max="100" value="50" class="comparison-range" id="comparisonRange" aria-label="Before and after comparison slider">
+                </div>
+
+                <div class="comparison-caption-bar">
+                    <div class="gear-detail" id="gearCam">
+                        <span class="gear-icon">📷</span>
+                        <div>
+                            <strong id="captionCamTitle">Nikon Z6 II · 85mm Prime</strong>
+                            <span id="captionCamDesc">Full-Frame Sensor RAW • Uncompressed 14-Bit Color Profile</span>
+                        </div>
+                    </div>
+                    <div class="gear-detail" id="gearGrading">
+                        <span class="gear-icon">🎨</span>
+                        <div>
+                            <strong id="captionGradeTitle">Papai Cinema 3D LUT</strong>
+                            <span id="captionGradeDesc">Warm Bengali Wedding Skin Tones & Deep Crimson Depth</span>
+                        </div>
+                    </div>
+                    <div class="gear-detail" id="gearRetouch">
+                        <span class="gear-icon">✨</span>
+                        <div>
+                            <strong id="captionRetouchTitle">Editorial Retouching</strong>
+                            <span id="captionRetouchDesc">Frequency Separation + Natural Skin Texture Preservation</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -470,45 +579,292 @@
             </div>
             <div class="swiper reels-swiper">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide reel-card">
+                    <!-- REEL 1 -->
+                    <div class="swiper-slide reel-card" data-video="./Data/WhatsApp Video 2026-04-19 at 8.23.17 PM.mp4" data-title="Gaye Holud & Haldi Energy">
                         <video src="/assets/WhatsApp%20Video%202026-04-19%20at%208.23.17%20PM-UO3zlLDe.mp4" class="hover-reel" preload="metadata" loop muted playsinline></video>
-                        <div class="reel-overlay"><div class="play-icon">▶</div></div>
-                        <div class="slide-label">WEDDING REEL</div>
+                        <div class="reel-top-bar">
+                            <div class="reel-studio-pill">
+                                <img src="/assets/6-C5f34AlC.png" alt="Logo" class="reel-pill-logo">
+                                <span>Papai Studio</span>
+                            </div>
+                            <button class="reel-sound-toggle" aria-label="Toggle Sound" onclick="toggleReelSound(event, this)">
+                                <span>🔇</span>
+                            </button>
+                        </div>
+                        <div class="reel-side-actions">
+                            <div class="reel-action-btn like-btn" onclick="toggleReelLike(event, this)">
+                                <div class="action-icon-circle">♥</div>
+                                <span class="action-count">2.8k</span>
+                            </div>
+                            <a href="https://wa.me/917001192076?text=Hi%20Papai%20Studio,%20I%20loved%20the%20Gaye%20Holud%20Reel!" target="_blank" class="reel-action-btn" title="Book this style">
+                                <div class="action-icon-circle">💬</div>
+                                <span class="action-count">Book</span>
+                            </a>
+                            <div class="reel-action-btn" onclick="openCinemaModalFromCard(event, this)" title="Fullscreen Cinema">
+                                <div class="action-icon-circle">⛶</div>
+                                <span class="action-count">Cinema</span>
+                            </div>
+                        </div>
+                        <div class="reel-bottom-info">
+                            <span class="reel-tag">✦ 4K CINEMATIC REEL</span>
+                            <h3 class="reel-title">Gaye Holud &amp; Haldi Energy</h3>
+                            <p class="reel-music">🎵 Original Sound · Papai Studio</p>
+                            <button class="reel-watch-btn" onclick="openCinemaModalFromCard(event, this)">
+                                WATCH FULL CINEMA <span>▶</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="swiper-slide reel-card">
+
+                    <!-- REEL 2 -->
+                    <div class="swiper-slide reel-card" data-video="./Data/WhatsApp Video 2026-04-19 at 8.26.34 PM.mp4" data-title="Sindoor Daan Emotional Highlights">
                         <video src="/assets/WhatsApp%20Video%202026-04-19%20at%208.26.34%20PM-BMroaDHB.mp4" class="hover-reel" preload="metadata" loop muted playsinline></video>
-                        <div class="reel-overlay"><div class="play-icon">▶</div></div>
-                        <div class="slide-label">CINEMATIC STORY</div>
+                        <div class="reel-top-bar">
+                            <div class="reel-studio-pill">
+                                <img src="/assets/6-C5f34AlC.png" alt="Logo" class="reel-pill-logo">
+                                <span>Papai Studio</span>
+                            </div>
+                            <button class="reel-sound-toggle" aria-label="Toggle Sound" onclick="toggleReelSound(event, this)">
+                                <span>🔇</span>
+                            </button>
+                        </div>
+                        <div class="reel-side-actions">
+                            <div class="reel-action-btn like-btn" onclick="toggleReelLike(event, this)">
+                                <div class="action-icon-circle">♥</div>
+                                <span class="action-count">3.4k</span>
+                            </div>
+                            <a href="https://wa.me/917001192076?text=Hi%20Papai%20Studio,%20I%20loved%20the%20Sindoor%20Daan%20Reel!" target="_blank" class="reel-action-btn" title="Book this style">
+                                <div class="action-icon-circle">💬</div>
+                                <span class="action-count">Book</span>
+                            </a>
+                            <div class="reel-action-btn" onclick="openCinemaModalFromCard(event, this)" title="Fullscreen Cinema">
+                                <div class="action-icon-circle">⛶</div>
+                                <span class="action-count">Cinema</span>
+                            </div>
+                        </div>
+                        <div class="reel-bottom-info">
+                            <span class="reel-tag">✦ 4K CINEMATIC REEL</span>
+                            <h3 class="reel-title">Sindoor Daan Emotional Moments</h3>
+                            <p class="reel-music">🎵 Original Sound · Papai Studio</p>
+                            <button class="reel-watch-btn" onclick="openCinemaModalFromCard(event, this)">
+                                WATCH FULL CINEMA <span>▶</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="swiper-slide reel-card">
+
+                    <!-- REEL 3 -->
+                    <div class="swiper-slide reel-card" data-video="./Data/km_20260423_1080p_60f_20260423_175727_web.mp4" data-title="Pre-Wedding Cinematic Magic">
                         <video src="/assets/km_20260423_1080p_60f_20260423_175727_web-DuZB2tt3.mp4" class="hover-reel" preload="metadata" loop muted playsinline></video>
-                        <div class="reel-overlay"><div class="play-icon">▶</div></div>
-                        <div class="slide-label">PRE-WEDDING MAGIC</div>
+                        <div class="reel-top-bar">
+                            <div class="reel-studio-pill">
+                                <img src="/assets/6-C5f34AlC.png" alt="Logo" class="reel-pill-logo">
+                                <span>Papai Studio</span>
+                            </div>
+                            <button class="reel-sound-toggle" aria-label="Toggle Sound" onclick="toggleReelSound(event, this)">
+                                <span>🔇</span>
+                            </button>
+                        </div>
+                        <div class="reel-side-actions">
+                            <div class="reel-action-btn like-btn" onclick="toggleReelLike(event, this)">
+                                <div class="action-icon-circle">♥</div>
+                                <span class="action-count">1.9k</span>
+                            </div>
+                            <a href="https://wa.me/917001192076?text=Hi%20Papai%20Studio,%20I%20loved%20the%20Pre-Wedding%20Reel!" target="_blank" class="reel-action-btn" title="Book this style">
+                                <div class="action-icon-circle">💬</div>
+                                <span class="action-count">Book</span>
+                            </a>
+                            <div class="reel-action-btn" onclick="openCinemaModalFromCard(event, this)" title="Fullscreen Cinema">
+                                <div class="action-icon-circle">⛶</div>
+                                <span class="action-count">Cinema</span>
+                            </div>
+                        </div>
+                        <div class="reel-bottom-info">
+                            <span class="reel-tag">✦ 4K CINEMATIC REEL</span>
+                            <h3 class="reel-title">Pre-Wedding Cinematic Magic</h3>
+                            <p class="reel-music">🎵 Acoustic Strings · Papai Studio</p>
+                            <button class="reel-watch-btn" onclick="openCinemaModalFromCard(event, this)">
+                                WATCH FULL CINEMA <span>▶</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="swiper-slide reel-card">
+
+                    <!-- REEL 4 -->
+                    <div class="swiper-slide reel-card" data-video="./Data/km_20260423_1080p_60f_20260423_175428_web.mp4" data-title="Bridal Entry & Shubho Drishti">
                         <video src="/assets/km_20260423_1080p_60f_20260423_175428_web-11AKVA2s.mp4" class="hover-reel" preload="metadata" loop muted playsinline></video>
-                        <div class="reel-overlay"><div class="play-icon">▶</div></div>
-                        <div class="slide-label">CINEMATIC JOURNEY</div>
+                        <div class="reel-top-bar">
+                            <div class="reel-studio-pill">
+                                <img src="/assets/6-C5f34AlC.png" alt="Logo" class="reel-pill-logo">
+                                <span>Papai Studio</span>
+                            </div>
+                            <button class="reel-sound-toggle" aria-label="Toggle Sound" onclick="toggleReelSound(event, this)">
+                                <span>🔇</span>
+                            </button>
+                        </div>
+                        <div class="reel-side-actions">
+                            <div class="reel-action-btn like-btn" onclick="toggleReelLike(event, this)">
+                                <div class="action-icon-circle">♥</div>
+                                <span class="action-count">4.1k</span>
+                            </div>
+                            <a href="https://wa.me/917001192076?text=Hi%20Papai%20Studio,%20I%20loved%20the%20Bridal%20Entry%20Reel!" target="_blank" class="reel-action-btn" title="Book this style">
+                                <div class="action-icon-circle">💬</div>
+                                <span class="action-count">Book</span>
+                            </a>
+                            <div class="reel-action-btn" onclick="openCinemaModalFromCard(event, this)" title="Fullscreen Cinema">
+                                <div class="action-icon-circle">⛶</div>
+                                <span class="action-count">Cinema</span>
+                            </div>
+                        </div>
+                        <div class="reel-bottom-info">
+                            <span class="reel-tag">✦ 4K CINEMATIC REEL</span>
+                            <h3 class="reel-title">Bridal Entry &amp; Shubho Drishti</h3>
+                            <p class="reel-music">🎵 Shehnai Heritage · Papai Studio</p>
+                            <button class="reel-watch-btn" onclick="openCinemaModalFromCard(event, this)">
+                                WATCH FULL CINEMA <span>▶</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="swiper-slide reel-card">
+
+                    <!-- REEL 5 -->
+                    <div class="swiper-slide reel-card" data-video="./Data/km_20260423_1080p_60f_20260423_180033_web.mp4" data-title="Golden Hour Mandap Romance">
                         <video src="/assets/km_20260423_1080p_60f_20260423_180033_web-BYqJbnoG.mp4" class="hover-reel" preload="metadata" loop muted playsinline></video>
-                        <div class="reel-overlay"><div class="play-icon">▶</div></div>
-                        <div class="slide-label">GOLDEN HOUR</div>
+                        <div class="reel-top-bar">
+                            <div class="reel-studio-pill">
+                                <img src="/assets/6-C5f34AlC.png" alt="Logo" class="reel-pill-logo">
+                                <span>Papai Studio</span>
+                            </div>
+                            <button class="reel-sound-toggle" aria-label="Toggle Sound" onclick="toggleReelSound(event, this)">
+                                <span>🔇</span>
+                            </button>
+                        </div>
+                        <div class="reel-side-actions">
+                            <div class="reel-action-btn like-btn" onclick="toggleReelLike(event, this)">
+                                <div class="action-icon-circle">♥</div>
+                                <span class="action-count">2.1k</span>
+                            </div>
+                            <a href="https://wa.me/917001192076?text=Hi%20Papai%20Studio,%20I%20loved%20the%20Golden%20Hour%20Reel!" target="_blank" class="reel-action-btn" title="Book this style">
+                                <div class="action-icon-circle">💬</div>
+                                <span class="action-count">Book</span>
+                            </a>
+                            <div class="reel-action-btn" onclick="openCinemaModalFromCard(event, this)" title="Fullscreen Cinema">
+                                <div class="action-icon-circle">⛶</div>
+                                <span class="action-count">Cinema</span>
+                            </div>
+                        </div>
+                        <div class="reel-bottom-info">
+                            <span class="reel-tag">✦ 4K CINEMATIC REEL</span>
+                            <h3 class="reel-title">Golden Hour Mandap Romance</h3>
+                            <p class="reel-music">🎵 Original Sound · Papai Studio</p>
+                            <button class="reel-watch-btn" onclick="openCinemaModalFromCard(event, this)">
+                                WATCH FULL CINEMA <span>▶</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="swiper-slide reel-card">
+
+                    <!-- REEL 6 -->
+                    <div class="swiper-slide reel-card" data-video="./Data/km_20260423_1080p_60f_20260423_175909_web.mp4" data-title="Traditional Bengali Rites">
                         <video src="/assets/km_20260423_1080p_60f_20260423_175909_web-zQ_m-wDn.mp4" class="hover-reel" preload="metadata" loop muted playsinline></video>
-                        <div class="reel-overlay"><div class="play-icon">▶</div></div>
-                        <div class="slide-label">TRADITIONAL VIBES</div>
+                        <div class="reel-top-bar">
+                            <div class="reel-studio-pill">
+                                <img src="/assets/6-C5f34AlC.png" alt="Logo" class="reel-pill-logo">
+                                <span>Papai Studio</span>
+                            </div>
+                            <button class="reel-sound-toggle" aria-label="Toggle Sound" onclick="toggleReelSound(event, this)">
+                                <span>🔇</span>
+                            </button>
+                        </div>
+                        <div class="reel-side-actions">
+                            <div class="reel-action-btn like-btn" onclick="toggleReelLike(event, this)">
+                                <div class="action-icon-circle">♥</div>
+                                <span class="action-count">1.7k</span>
+                            </div>
+                            <a href="https://wa.me/917001192076?text=Hi%20Papai%20Studio,%20I%20loved%20the%20Traditional%20Bengali%20Reel!" target="_blank" class="reel-action-btn" title="Book this style">
+                                <div class="action-icon-circle">💬</div>
+                                <span class="action-count">Book</span>
+                            </a>
+                            <div class="reel-action-btn" onclick="openCinemaModalFromCard(event, this)" title="Fullscreen Cinema">
+                                <div class="action-icon-circle">⛶</div>
+                                <span class="action-count">Cinema</span>
+                            </div>
+                        </div>
+                        <div class="reel-bottom-info">
+                            <span class="reel-tag">✦ 4K CINEMATIC REEL</span>
+                            <h3 class="reel-title">Traditional Bengali Rites</h3>
+                            <p class="reel-music">🎵 Traditional Bengali Flute</p>
+                            <button class="reel-watch-btn" onclick="openCinemaModalFromCard(event, this)">
+                                WATCH FULL CINEMA <span>▶</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="swiper-slide reel-card">
+
+                    <!-- REEL 7 -->
+                    <div class="swiper-slide reel-card" data-video="./Data/WhatsApp Video 2026-04-19 at 8.27.29 PM.mp4" data-title="Royal Reception Gala">
                         <video src="/assets/WhatsApp%20Video%202026-04-19%20at%208.27.29%20PM-BaFLqVUo.mp4" class="hover-reel" preload="metadata" loop muted playsinline></video>
-                        <div class="reel-overlay"><div class="play-icon">▶</div></div>
-                        <div class="slide-label">SACRED MOMENTS</div>
+                        <div class="reel-top-bar">
+                            <div class="reel-studio-pill">
+                                <img src="/assets/6-C5f34AlC.png" alt="Logo" class="reel-pill-logo">
+                                <span>Papai Studio</span>
+                            </div>
+                            <button class="reel-sound-toggle" aria-label="Toggle Sound" onclick="toggleReelSound(event, this)">
+                                <span>🔇</span>
+                            </button>
+                        </div>
+                        <div class="reel-side-actions">
+                            <div class="reel-action-btn like-btn" onclick="toggleReelLike(event, this)">
+                                <div class="action-icon-circle">♥</div>
+                                <span class="action-count">3.1k</span>
+                            </div>
+                            <a href="https://wa.me/917001192076?text=Hi%20Papai%20Studio,%20I%20loved%20the%20Reception%20Reel!" target="_blank" class="reel-action-btn" title="Book this style">
+                                <div class="action-icon-circle">💬</div>
+                                <span class="action-count">Book</span>
+                            </a>
+                            <div class="reel-action-btn" onclick="openCinemaModalFromCard(event, this)" title="Fullscreen Cinema">
+                                <div class="action-icon-circle">⛶</div>
+                                <span class="action-count">Cinema</span>
+                            </div>
+                        </div>
+                        <div class="reel-bottom-info">
+                            <span class="reel-tag">✦ 4K CINEMATIC REEL</span>
+                            <h3 class="reel-title">Royal Reception Gala</h3>
+                            <p class="reel-music">🎵 Grand Finale · Papai Studio</p>
+                            <button class="reel-watch-btn" onclick="openCinemaModalFromCard(event, this)">
+                                WATCH FULL CINEMA <span>▶</span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="swiper-slide reel-card">
+
+                    <!-- REEL 8 -->
+                    <div class="swiper-slide reel-card" data-video="./Data/WhatsApp Video 2026-04-19 at 8.25.55 PM.mp4" data-title="Aerial 4K Drone Showcase">
                         <video src="/assets/WhatsApp%20Video%202026-04-19%20at%208.25.55%20PM-Bui4Br90.mp4" class="hover-reel" preload="metadata" loop muted playsinline></video>
-                        <div class="reel-overlay"><div class="play-icon">▶</div></div>
-                        <div class="slide-label">ETERNAL LOVE</div>
+                        <div class="reel-top-bar">
+                            <div class="reel-studio-pill">
+                                <img src="/assets/6-C5f34AlC.png" alt="Logo" class="reel-pill-logo">
+                                <span>Papai Studio</span>
+                            </div>
+                            <button class="reel-sound-toggle" aria-label="Toggle Sound" onclick="toggleReelSound(event, this)">
+                                <span>🔇</span>
+                            </button>
+                        </div>
+                        <div class="reel-side-actions">
+                            <div class="reel-action-btn like-btn" onclick="toggleReelLike(event, this)">
+                                <div class="action-icon-circle">♥</div>
+                                <span class="action-count">5.2k</span>
+                            </div>
+                            <a href="https://wa.me/917001192076?text=Hi%20Papai%20Studio,%20I%20loved%20the%20Aerial%20Drone%20Reel!" target="_blank" class="reel-action-btn" title="Book this style">
+                                <div class="action-icon-circle">💬</div>
+                                <span class="action-count">Book</span>
+                            </a>
+                            <div class="reel-action-btn" onclick="openCinemaModalFromCard(event, this)" title="Fullscreen Cinema">
+                                <div class="action-icon-circle">⛶</div>
+                                <span class="action-count">Cinema</span>
+                            </div>
+                        </div>
+                        <div class="reel-bottom-info">
+                            <span class="reel-tag">✦ 4K CINEMATIC REEL</span>
+                            <h3 class="reel-title">Aerial 4K Drone Showcase</h3>
+                            <p class="reel-music">🎵 Epic Cinematic Audio · Papai Studio</p>
+                            <button class="reel-watch-btn" onclick="openCinemaModalFromCard(event, this)">
+                                WATCH FULL CINEMA <span>▶</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="swiper-button-prev"></div>
@@ -650,20 +1006,152 @@
                     </div>
                 </div>
 
-                <!-- Pricing -->
-                <div class="info-box pricing-box" style="margin-top: 60px;">
-                    <h2 class="gold-subtitle">TRANSPARENT PRICING</h2>
-                    <h3 class="bold-title">Invest in <span class="gold">Memories</span></h3>
-                    <p>Every family is unique — so are our packages. We offer tailored coverage for full Bengali wedding ceremonies, Haldi, Reception, Rice Ceremonies, and exclusive Pre-Wedding drone sessions. Reach out for a personalised quote.</p>
-                    <div class="pricing-features">
-                        <span>✓ Full Day Coverage</span>
-                        <span>✓ Professional Photo Gallery</span>
-                        <span>✓ 4K Video &amp; Drone Shots</span>
-                        <span>✓ Private Online Album</span>
-                        <span>✓ Edited Photobook Available</span>
-                        <span>✓ Raw Deliverables on Request</span>
+                <!-- ================================================ -->
+                <!-- INTERACTIVE WEDDING PACKAGE & QUOTE ESTIMATOR -->
+                <!-- ================================================ -->
+                <div class="quote-estimator-section" id="quote-calculator" style="margin-top: 60px;">
+                    <div class="section-badge-center">
+                        <span class="section-tag-gold">✦ BESPOKE PRICING ESTIMATOR ✦</span>
                     </div>
-                    <a href="https://wa.me/917001192076" target="_blank" class="magnetic-btn">GET A QUOTE ON WHATSAPP</a>
+                    <h2 class="section-heading text-center">CUSTOMIZE YOUR <span class="gold">WEDDING PACKAGE</span></h2>
+                    <p class="retouch-intro text-center">
+                        Choose your rituals, coverage length, and cinematic deliverables for an immediate transparent estimate, then confirm date availability instantly on WhatsApp.
+                    </p>
+
+                    <div class="estimator-grid">
+                        <!-- Left: Controls -->
+                        <div class="estimator-controls">
+                            <!-- Step 1: Occasion -->
+                            <div class="estimator-step">
+                                <div class="step-label">
+                                    <span class="step-num">1</span>
+                                    <span>Select Celebration Type</span>
+                                </div>
+                                <div class="options-grid">
+                                    <button class="option-btn selected" data-type="wedding" data-title="Full Bengali Wedding" data-base="55000" onclick="selectCelebration(this)">
+                                        <strong>Full Bengali Wedding</strong>
+                                        <span>Gaye Holud, Biye &amp; Bou Bhaat</span>
+                                    </button>
+                                    <button class="option-btn" data-type="haldi" data-title="Haldi & Gaye Holud" data-base="22000" onclick="selectCelebration(this)">
+                                        <strong>Haldi &amp; Gaye Holud</strong>
+                                        <span>Vibrant ritual documentation</span>
+                                    </button>
+                                    <button class="option-btn" data-type="prewed" data-title="Pre-Wedding Cinematic" data-base="18000" onclick="selectCelebration(this)">
+                                        <strong>Pre-Wedding Cinematic</strong>
+                                        <span>Artistic outdoor location shoot</span>
+                                    </button>
+                                    <button class="option-btn" data-type="rice" data-title="Rice Ceremony (Annaprashan)" data-base="15000" onclick="selectCelebration(this)">
+                                        <strong>Rice Ceremony / Other</strong>
+                                        <span>Annaprashan &amp; sacred rites</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Duration -->
+                            <div class="estimator-step">
+                                <div class="step-label">
+                                    <span class="step-num">2</span>
+                                    <span>Coverage Duration</span>
+                                </div>
+                                <div class="options-grid">
+                                    <button class="option-btn selected" data-days="1" data-title="1 Day Grand Coverage" data-mult="1.0" onclick="selectDuration(this)">
+                                        <strong>1 Day Grand Coverage</strong>
+                                        <span>Full-day ceremony &amp; reception</span>
+                                    </button>
+                                    <button class="option-btn" data-days="2" data-title="2 Days Coverage" data-mult="1.45" onclick="selectDuration(this)">
+                                        <strong>2 Days Coverage</strong>
+                                        <span>Gaye Holud + Wedding Day</span>
+                                    </button>
+                                    <button class="option-btn" data-days="3" data-title="3 Days Complete Saga" data-mult="1.85" onclick="selectDuration(this)">
+                                        <strong>3 Days Complete Saga</strong>
+                                        <span>Pre-Wed + Wedding + Bou Bhaat</span>
+                                    </button>
+                                    <button class="option-btn" data-days="custom" data-title="Intimate Half-Day" data-mult="0.8" onclick="selectDuration(this)">
+                                        <strong>Intimate Half-Day</strong>
+                                        <span>Evening Reception or Morning Rites</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Add-ons -->
+                            <div class="estimator-step">
+                                <div class="step-label">
+                                    <span class="step-num">3</span>
+                                    <span>Cinematic &amp; Heirloom Add-Ons</span>
+                                </div>
+                                <div class="addons-list">
+                                    <div class="addon-card active" data-addon="drone" data-name="4K Aerial Drone Coverage" data-price="8000" onclick="toggleAddon(this)">
+                                        <div class="addon-left">
+                                            <div class="custom-checkbox">✓</div>
+                                            <span class="addon-title">4K Licensed Aerial Drone Coverage</span>
+                                        </div>
+                                        <span class="addon-price">+₹8,000</span>
+                                    </div>
+                                    <div class="addon-card active" data-addon="reels" data-name="3× Instagram Cinematic Reels" data-price="6000" onclick="toggleAddon(this)">
+                                        <div class="addon-left">
+                                            <div class="custom-checkbox">✓</div>
+                                            <span class="addon-title">3× Social Media Cinematic Vertical Reels</span>
+                                        </div>
+                                        <span class="addon-price">+₹6,000</span>
+                                    </div>
+                                    <div class="addon-card" data-addon="album" data-name="40-Page Velvet Photobook" data-price="10000" onclick="toggleAddon(this)">
+                                        <div class="addon-left">
+                                            <div class="custom-checkbox"></div>
+                                            <span class="addon-title">Luxury Handcrafted Velvet/Leather Photobook (40-Page)</span>
+                                        </div>
+                                        <span class="addon-price">+₹10,000</span>
+                                    </div>
+                                    <div class="addon-card" data-addon="ssd" data-name="Raw Footage & Flash Drive" data-price="3500" onclick="toggleAddon(this)">
+                                        <div class="addon-left">
+                                            <div class="custom-checkbox"></div>
+                                            <span class="addon-title">All Raw Photos &amp; 4K Video Archive on Flash Drive</span>
+                                        </div>
+                                        <span class="addon-price">+₹3,500</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Event Date -->
+                            <div class="estimator-step">
+                                <div class="step-label">
+                                    <span class="step-num">4</span>
+                                    <span>Your Tentative Event Date</span>
+                                </div>
+                                <div class="date-picker-wrap">
+                                    <input type="date" id="eventDateInput" class="estimator-date-input" onchange="updateEstimatedQuote()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Live Estimate Card -->
+                        <div class="live-quote-card">
+                            <div class="quote-card-header">
+                                <span class="quote-tag">✦ ESTIMATED INVESTMENT</span>
+                                <div class="quote-price-wrap">
+                                    <div class="quote-price-display">
+                                        <span class="gold-accent" id="quotePriceText">₹69,000</span>
+                                    </div>
+                                    <span class="quote-tax-note">Approx. tariff for selected deliverables • Final quote confirmed upon date consultation</span>
+                                </div>
+                            </div>
+
+                            <div class="quote-inclusions-list">
+                                <h4 class="quote-inc-title">Included In This Package:</h4>
+                                <ul class="quote-inc-items" id="quoteInclusionsList">
+                                    <li><span>✓</span> Dual Full-Frame Nikon Cameras</li>
+                                    <li><span>✓</span> Master Colour Grading &amp; Retouching</li>
+                                    <li><span>✓</span> 4K Drone Aerial Coverage</li>
+                                    <li><span>✓</span> 3× Instagram Cinematic Reels</li>
+                                    <li><span>✓</span> Private Online Cloud Gallery</li>
+                                </ul>
+                            </div>
+
+                            <a href="#" id="quoteWhatsappBtn" target="_blank" class="quote-whatsapp-btn">
+                                <span>CHECK DATE ON WHATSAPP</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -886,7 +1374,24 @@
         <div class="modal-bg" onclick="toggleModal('service-modal-10')"></div>
     </div>
 
+    <!-- ================================================ -->
+    <!-- FULLSCREEN REEL CINEMA MODAL -->
+    <!-- ================================================ -->
+    <div id="cinemaModal" class="cinema-modal" role="dialog" aria-modal="true">
+        <div class="cinema-wrapper">
+            <button class="cinema-close-btn" onclick="closeCinemaModal()" aria-label="Close Cinema Player">✕</button>
+            <video id="cinemaModalVideo" class="cinema-video" playsinline loop></video>
+            <div class="cinema-bottom-hud">
+                <h3 id="cinemaModalTitle" class="cinema-video-title">Reel Title</h3>
+                <a href="#" id="cinemaModalWhatsappBtn" target="_blank" class="cinema-cta-btn">
+                    <span>BOOK PAPAI STUDIO FOR THIS STYLE</span>
+                    <span>→</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 </html>
