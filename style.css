@@ -188,7 +188,7 @@ body {
     left: 0;
     right: 0;
     z-index: 9999;
-    padding: 25px 40px;
+    padding: 10px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -199,7 +199,7 @@ body {
 
 .header.scrolled {
     background: rgba(7, 7, 7, 0.96);
-    padding: 15px 40px;
+    padding: 8px 32px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
 }
 
@@ -207,18 +207,18 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(7,7,7,0.7) 0%, transparent 100%);
+    background: linear-gradient(180deg, rgba(7,7,7,0.45) 0%, transparent 100%);
     pointer-events: none;
 }
 
 .nav-logo {
-    width: 90px;
+    width: 48px;
     position: relative;
-    filter: drop-shadow(0 4px 12px rgba(201,169,110,0.4));
+    filter: drop-shadow(0 2px 8px rgba(201,169,110,0.35));
     transition: var(--transition);
 }
 
-.nav-logo:hover { opacity: 1; filter: drop-shadow(0 4px 20px rgba(201,169,110,0.9)); transform: scale(1.05); }
+.nav-logo:hover { opacity: 1; filter: drop-shadow(0 4px 16px rgba(201,169,110,0.85)); transform: scale(1.05); }
 
 /* Hamburger Menu */
 .menu-btn {
@@ -1572,9 +1572,12 @@ body {
 /* 21. MOBILE HEADER */
 @media (max-width: 768px) {
     .header {
-        padding: 20px 20px;
+        padding: 8px 16px;
     }
-    .nav-logo { width: 65px; }
+    .header-live-pill {
+        display: none;
+    }
+    .nav-logo { width: 42px; }
     .reviews-slider {
         padding: 0;
         gap: 20px;
@@ -1929,32 +1932,32 @@ body {
 .header-badge-wrap {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 10px;
 }
 
 .header-live-pill {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    background: rgba(18, 14, 14, 0.75);
-    border: 1px solid rgba(201, 169, 110, 0.3);
+    gap: 6px;
+    padding: 4px 10px;
+    background: rgba(18, 14, 14, 0.7);
+    border: 1px solid rgba(201, 169, 110, 0.25);
     border-radius: 50px;
     font-family: var(--font-body);
-    font-size: 0.72rem;
-    letter-spacing: 1px;
+    font-size: 0.66rem;
+    letter-spacing: 0.8px;
     color: var(--gold-light);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     text-transform: uppercase;
 }
 
 .live-beacon {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     background: #2ecc71;
     border-radius: 50%;
-    box-shadow: 0 0 10px #2ecc71;
+    box-shadow: 0 0 8px #2ecc71;
     animation: beaconPulse 1.8s infinite;
 }
 
@@ -1967,18 +1970,18 @@ body {
 .ambient-audio-toggle {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: rgba(18, 14, 14, 0.75);
-    border: 1px solid rgba(201, 169, 110, 0.35);
+    gap: 6px;
+    background: rgba(18, 14, 14, 0.7);
+    border: 1px solid rgba(201, 169, 110, 0.25);
     border-radius: 50px;
-    padding: 6px 14px;
+    padding: 4px 10px;
     color: var(--text-light);
-    font-size: 0.72rem;
-    letter-spacing: 1px;
+    font-size: 0.66rem;
+    letter-spacing: 0.8px;
     cursor: pointer;
     transition: var(--transition);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .ambient-audio-toggle:hover {
