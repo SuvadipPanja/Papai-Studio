@@ -2664,36 +2664,102 @@ body.ready .cursor {
     flex-direction: column;
 }
 
+.cinema-top-controls {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 25;
+}
+
+.cinema-sound-btn,
+.cinema-close-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: var(--transition);
+}
+
+.cinema-sound-btn:hover,
+.cinema-close-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: scale(1.1);
+}
+
+.cinema-video-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
 .cinema-video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     background: #000;
+    display: block;
 }
 
-.cinema-close-btn {
+.cinema-play-overlay {
     position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
-    font-size: 1.2rem;
-    cursor: pointer;
-    z-index: 20;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: var(--transition);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
 }
 
-.cinema-close-btn:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-    transform: scale(1.1);
+.cinema-play-overlay.paused {
+    opacity: 1;
+}
+
+.cinema-center-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.65);
+    border: 2px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 4px;
+    box-shadow: 0 0 30px rgba(201, 169, 110, 0.6);
+}
+
+.cinema-progress-track {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.15);
+    z-index: 20;
+}
+
+.cinema-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--gold-gradient);
+    transition: width 0.1s linear;
 }
 
 .cinema-bottom-hud {

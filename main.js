@@ -2,6 +2,10 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
+import bridalPresetImg from './Data/SP0_2400.jpg.jpeg';
+import sindoorPresetImg from './Data/SP0_2423.jpg.jpeg';
+import haldiPresetImg from './Data/haldi.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 // ─────────────────────────────────────────────
@@ -405,16 +409,27 @@ window.openCinemaModalFromCard = function(event, el) {
     const card = el.closest('.reel-card');
     if (!card) return;
 
-    const videoSrc = card.getAttribute('data-video');
+    const sourceVideo = card.querySelector('video');
+    // Extract the real compiled URL already loaded in the DOM video!
+    const videoSrc = sourceVideo ? (sourceVideo.currentSrc || sourceVideo.src) : card.getAttribute('data-video');
     const title = card.getAttribute('data-title') || 'Cinematic Reel';
 
     if (cinemaModalVideo) {
         cinemaModalVideo.src = videoSrc;
-        cinemaModalVideo.currentTime = 0;
+        cinemaModalVideo.currentTime = sourceVideo ? sourceVideo.currentTime : 0;
         cinemaModalVideo.muted = false;
+
+        const soundIcon = document.getElementById('cinemaSoundIcon');
+        if (soundIcon) soundIcon.textContent = '🔊';
+
+        const playOverlay = document.getElementById('cinemaPlayOverlay');
+        if (playOverlay) playOverlay.classList.remove('paused');
+
         cinemaModalVideo.play().catch(() => {
+            // If browser autoplay policy blocks sound, play muted and let user unmute
             cinemaModalVideo.muted = true;
-            cinemaModalVideo.play();
+            if (soundIcon) soundIcon.textContent = '🔇';
+            cinemaModalVideo.play().catch(e => console.error("Cinema play failed:", e));
         });
     }
 
@@ -430,6 +445,30 @@ window.openCinemaModalFromCard = function(event, el) {
     if (cinemaModal) {
         cinemaModal.classList.add('active');
         lenis.stop();
+    }
+};
+
+window.toggleCinemaModalPlay = function(event) {
+    if (event) event.stopPropagation();
+    if (!cinemaModalVideo) return;
+    const playOverlay = document.getElementById('cinemaPlayOverlay');
+
+    if (cinemaModalVideo.paused) {
+        cinemaModalVideo.play();
+        if (playOverlay) playOverlay.classList.remove('paused');
+    } else {
+        cinemaModalVideo.pause();
+        if (playOverlay) playOverlay.classList.add('paused');
+    }
+};
+
+window.toggleCinemaModalSound = function(event) {
+    if (event) event.stopPropagation();
+    if (!cinemaModalVideo) return;
+    cinemaModalVideo.muted = !cinemaModalVideo.muted;
+    const soundIcon = document.getElementById('cinemaSoundIcon');
+    if (soundIcon) {
+        soundIcon.textContent = cinemaModalVideo.muted ? '🔇' : '🔊';
     }
 };
 
@@ -449,6 +488,26 @@ if (cinemaModal) {
         if (e.target === cinemaModal) {
             window.closeCinemaModal();
         }
+    });
+}
+
+if (cinemaModalVideo) {
+    cinemaModalVideo.addEventListener('timeupdate', () => {
+        const progressFill = document.getElementById('cinemaProgressFill');
+        if (progressFill && cinemaModalVideo.duration) {
+            const pct = (cinemaModalVideo.currentTime / cinemaModalVideo.duration) * 100;
+            progressFill.style.width = pct + '%';
+        }
+    });
+
+    cinemaModalVideo.addEventListener('play', () => {
+        const playOverlay = document.getElementById('cinemaPlayOverlay');
+        if (playOverlay) playOverlay.classList.remove('paused');
+    });
+
+    cinemaModalVideo.addEventListener('pause', () => {
+        const playOverlay = document.getElementById('cinemaPlayOverlay');
+        if (playOverlay) playOverlay.classList.add('paused');
     });
 }
 
@@ -476,7 +535,7 @@ if (comparisonRange) {
 // Retouch Presets
 const retouchPresets = {
     bridal: {
-        img: './Data/SP0_2400.jpg.jpeg',
+        img: bridalPresetImg,
         camTitle: 'Nikon Z6 II · 85mm Prime',
         camDesc: 'Full-Frame Sensor RAW • Uncompressed 14-Bit Color Profile',
         gradeTitle: 'Papai Signature 3D LUT',
@@ -485,7 +544,7 @@ const retouchPresets = {
         retouchDesc: 'Frequency Separation + Natural Skin Texture Preservation'
     },
     sindoor: {
-        img: './Data/SP0_2423.jpg.jpeg',
+        img: sindoorPresetImg,
         camTitle: 'Nikon Z8 · 35mm f/1.4 S',
         camDesc: 'High Dynamic Range Mandap Sensor RAW Capture',
         gradeTitle: 'Royal Alta & Gold LUT',
@@ -494,7 +553,7 @@ const retouchPresets = {
         retouchDesc: 'Specular Glare Reduction & Cinematic Film Halation'
     },
     haldi: {
-        img: './Data/haldi.png',
+        img: haldiPresetImg,
         camTitle: 'Nikon Z6 II · 24-70mm f/2.8 S',
         camDesc: 'High-Speed 1/1000s RAW Splash Capture',
         gradeTitle: 'Solar Turmeric Glow',

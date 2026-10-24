@@ -1378,8 +1378,24 @@
     <!-- ================================================ -->
     <div id="cinemaModal" class="cinema-modal" role="dialog" aria-modal="true">
         <div class="cinema-wrapper">
-            <button class="cinema-close-btn" onclick="closeCinemaModal()" aria-label="Close Cinema Player">✕</button>
-            <video id="cinemaModalVideo" class="cinema-video" playsinline loop></video>
+            <div class="cinema-top-controls">
+                <button class="cinema-sound-btn" id="cinemaModalSoundBtn" onclick="toggleCinemaModalSound(event)" aria-label="Toggle Sound">
+                    <span id="cinemaSoundIcon">🔊</span>
+                </button>
+                <button class="cinema-close-btn" onclick="closeCinemaModal()" aria-label="Close Cinema Player">✕</button>
+            </div>
+            
+            <div class="cinema-video-stage" onclick="toggleCinemaModalPlay(event)">
+                <video id="cinemaModalVideo" class="cinema-video" playsinline loop preload="auto"></video>
+                <div class="cinema-play-overlay" id="cinemaPlayOverlay">
+                    <div class="cinema-center-icon">▶</div>
+                </div>
+            </div>
+
+            <div class="cinema-progress-track" id="cinemaProgressTrack">
+                <div class="cinema-progress-fill" id="cinemaProgressFill"></div>
+            </div>
+
             <div class="cinema-bottom-hud">
                 <h3 id="cinemaModalTitle" class="cinema-video-title">Reel Title</h3>
                 <a href="#" id="cinemaModalWhatsappBtn" target="_blank" class="cinema-cta-btn">

@@ -131,8 +131,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;700&family=Oswald:wght@200;400;500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-  <script type="module" crossorigin src="/assets/index-Cmi7hYvk.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-DN2bNMOV.css">
+  <script type="module" crossorigin src="/assets/index-DkRITuj0.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-aR9h1e7G.css">
 </head>
 <body>
 
@@ -1379,8 +1379,24 @@
     <!-- ================================================ -->
     <div id="cinemaModal" class="cinema-modal" role="dialog" aria-modal="true">
         <div class="cinema-wrapper">
-            <button class="cinema-close-btn" onclick="closeCinemaModal()" aria-label="Close Cinema Player">✕</button>
-            <video id="cinemaModalVideo" class="cinema-video" playsinline loop></video>
+            <div class="cinema-top-controls">
+                <button class="cinema-sound-btn" id="cinemaModalSoundBtn" onclick="toggleCinemaModalSound(event)" aria-label="Toggle Sound">
+                    <span id="cinemaSoundIcon">🔊</span>
+                </button>
+                <button class="cinema-close-btn" onclick="closeCinemaModal()" aria-label="Close Cinema Player">✕</button>
+            </div>
+            
+            <div class="cinema-video-stage" onclick="toggleCinemaModalPlay(event)">
+                <video id="cinemaModalVideo" class="cinema-video" playsinline loop preload="auto"></video>
+                <div class="cinema-play-overlay" id="cinemaPlayOverlay">
+                    <div class="cinema-center-icon">▶</div>
+                </div>
+            </div>
+
+            <div class="cinema-progress-track" id="cinemaProgressTrack">
+                <div class="cinema-progress-fill" id="cinemaProgressFill"></div>
+            </div>
+
             <div class="cinema-bottom-hud">
                 <h3 id="cinemaModalTitle" class="cinema-video-title">Reel Title</h3>
                 <a href="#" id="cinemaModalWhatsappBtn" target="_blank" class="cinema-cta-btn">
