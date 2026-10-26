@@ -27,6 +27,8 @@ gsap.ticker.add((time) => {
 });
 gsap.ticker.lagSmoothing(500, 33);
 
+const isMobile = () => window.matchMedia('(max-width: 768px)').matches;
+
 // ─────────────────────────────────────────────
 // 2. NAVIGATION OVERLAY
 // ─────────────────────────────────────────────
@@ -395,6 +397,12 @@ const retouchPresets = {
     }
 };
 
+// Preload preset images for instant zero-latency switching
+[bridalPresetImg, sindoorPresetImg, haldiPresetImg].forEach(src => {
+    const img = new Image();
+    img.src = src;
+});
+
 window.switchRetouchPreset = function(presetKey) {
     const preset = retouchPresets[presetKey];
     if (!preset) return;
@@ -408,9 +416,10 @@ window.switchRetouchPreset = function(presetKey) {
     const afterImg = document.getElementById('afterImg');
 
     if (beforeImg && afterImg) {
-        // Direct assignment with fast crossfade
         beforeImg.src = preset.img;
         afterImg.src = preset.img;
+        beforeImg.alt = `${preset.camTitle} - Unedited Camera RAW`;
+        afterImg.alt = `${preset.camTitle} - Papai Studio Master Retouching`;
     }
 
     const camTitle = document.getElementById('captionCamTitle');
@@ -429,6 +438,17 @@ window.switchRetouchPreset = function(presetKey) {
 
     setSliderPosition(50);
 };
+
+// Direct event listener binding as backup for inline onclick
+document.querySelectorAll('.retouch-tab').forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        e.preventDefault();
+        const preset = tab.getAttribute('data-preset');
+        if (preset) {
+            window.switchRetouchPreset(preset);
+        }
+    });
+});
 
 // Initialize slider position
 setSliderPosition(50);
