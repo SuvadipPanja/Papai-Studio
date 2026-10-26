@@ -1,6 +1,13 @@
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import Swiper from 'swiper';
+import { EffectCoverflow, Navigation, Pagination, Autoplay } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 import bridalPresetImg from './Data/retouch_bridal.jpg';
 import sindoorPresetImg from './Data/retouch_sindoor.jpg';
@@ -123,82 +130,83 @@ if (!isMobile()) {
 }
 
 // ─────────────────────────────────────────────
-// 6. SWIPER — Coverflow Gallery
+// 6. SWIPER — 3D Coverflow Gallery
 // ─────────────────────────────────────────────
-if (typeof Swiper !== 'undefined') {
-    new Swiper('.gallery-swiper', {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        loop: true,
-        coverflowEffect: {
-            rotate: 20,
-            stretch: 30,
-            depth: 250,
-            modifier: 1,
-            slideShadows: true,
-        },
-        autoplay: {
-            delay: 3500,
-            disableOnInteraction: false,
-        },
-        navigation: {
-            nextEl: '.gallery-swiper .swiper-button-next',
-            prevEl: '.gallery-swiper .swiper-button-prev',
-        },
-        pagination: {
-            el: '.gallery-swiper .swiper-pagination',
-            clickable: true,
-        },
-    });
+const gallerySwiper = new Swiper('.gallery-swiper', {
+    modules: [EffectCoverflow, Navigation, Pagination, Autoplay],
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    loop: true,
+    coverflowEffect: {
+        rotate: 20,
+        stretch: 30,
+        depth: 250,
+        modifier: 1,
+        slideShadows: true,
+    },
+    autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+    },
+    navigation: {
+        nextEl: '.gallery-swiper .swiper-button-next',
+        prevEl: '.gallery-swiper .swiper-button-prev',
+    },
+    pagination: {
+        el: '.gallery-swiper .swiper-pagination',
+        clickable: true,
+    },
+});
 
-    // ─────────────────────────────────────────────
-    // 6b. SWIPER — Coverflow Reels
-    // ─────────────────────────────────────────────
-    const reelsSwiper = new Swiper('.reels-swiper', {
-        effect: 'coverflow',
-        grabCursor: true,
-        centeredSlides: true,
-        slidesPerView: 'auto',
-        loop: true,
-        coverflowEffect: {
-            rotate: 20,
-            stretch: 30,
-            depth: 250,
-            modifier: 1,
-            slideShadows: true,
+// ─────────────────────────────────────────────
+// 6b. SWIPER — 3D Coverflow Reels
+// ─────────────────────────────────────────────
+const reelsSwiper = new Swiper('.reels-swiper', {
+    modules: [EffectCoverflow, Navigation, Pagination],
+    effect: 'coverflow',
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: 'auto',
+    loop: true,
+    coverflowEffect: {
+        rotate: 20,
+        stretch: 30,
+        depth: 250,
+        modifier: 1,
+        slideShadows: true,
+    },
+    navigation: {
+        nextEl: '.reels-swiper .swiper-button-next',
+        prevEl: '.reels-swiper .swiper-button-prev',
+    },
+    pagination: {
+        el: '.reels-swiper .swiper-pagination',
+        clickable: true,
+    },
+    on: {
+        init: function() {
+            // Play video in the first active slide
+            const activeVideo = this.slides[this.activeIndex]?.querySelector('video');
+            if (activeVideo) activeVideo.play().catch(() => {});
         },
-        navigation: {
-            nextEl: '.reels-swiper .swiper-button-next',
-            prevEl: '.reels-swiper .swiper-button-prev',
-        },
-        pagination: {
-            el: '.reels-swiper .swiper-pagination',
-            clickable: true,
-        },
-        on: {
-            init: function() {
-                // Play video in the first active slide
-                const activeVideo = this.slides[this.activeIndex].querySelector('video');
-                if (activeVideo) activeVideo.play().catch(() => {});
-            },
-            slideChange: function() {
-                // Pause all videos
-                this.slides.forEach(slide => {
-                    const video = slide.querySelector('video');
-                    if (video) {
-                        video.pause();
-                        video.currentTime = 0; // Reset to start
-                    }
-                });
-                // Play active one
-                const activeVideo = this.slides[this.activeIndex].querySelector('video');
-                if (activeVideo) activeVideo.play().catch(() => {});
-            }
+        slideChange: function() {
+            // Pause all videos
+            this.slides.forEach(slide => {
+                const video = slide.querySelector('video');
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0; // Reset to start
+                }
+            });
+            // Play active one
+            const activeVideo = this.slides[this.activeIndex]?.querySelector('video');
+            if (activeVideo) activeVideo.play().catch(() => {});
         }
-    });
-}
+    }
+});
 
 // ─────────────────────────────────────────────
 // 7. SCROLL TRIGGERED FADE-INS

@@ -611,27 +611,62 @@ body {
     transform: translateY(0);
 }
 
+.gallery-swiper .swiper-slide-active {
+    box-shadow: 0 0 50px rgba(201, 169, 110, 0.45);
+    border: 1.5px solid rgba(201, 169, 110, 0.65);
+}
+
 .swiper-button-next,
 .swiper-button-prev {
     color: var(--gold) !important;
-    background: rgba(0,0,0,0.5);
-    width: 48px !important;
-    height: 48px !important;
-    border-radius: 50%;
-    border: 1px solid rgba(201,169,110,0.4);
-    transition: background 0.3s, border-color 0.3s;
-}
-
-.swiper-button-next::after,
-.swiper-button-prev::after {
-    font-size: 1rem !important;
-    font-weight: 700;
+    background: rgba(18, 14, 14, 0.75) !important;
+    width: 52px !important;
+    height: 52px !important;
+    border-radius: 50% !important;
+    border: 1.5px solid rgba(201, 169, 110, 0.5) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease;
+    cursor: pointer !important;
+    z-index: 100 !important;
+    pointer-events: auto !important;
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-    background: var(--gold);
-    color: #000 !important;
+    background: var(--gold-gradient) !important;
+    color: #070707 !important;
+    border-color: var(--gold) !important;
+    transform: scale(1.12);
+    box-shadow: 0 6px 25px rgba(201, 169, 110, 0.6);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 1.15rem !important;
+    font-weight: 700;
+}
+
+.gallery-swiper .swiper-button-prev,
+.reels-swiper .swiper-button-prev {
+    left: 20px;
+}
+
+.gallery-swiper .swiper-button-next,
+.reels-swiper .swiper-button-next {
+    right: 20px;
+}
+
+@media (min-width: 1024px) {
+    .gallery-swiper .swiper-button-prev,
+    .reels-swiper .swiper-button-prev {
+        left: 35px;
+    }
+    .gallery-swiper .swiper-button-next,
+    .reels-swiper .swiper-button-next {
+        right: 85px; /* Clear fixed social sidebar on desktop */
+    }
 }
 
 .swiper-pagination-bullet {
