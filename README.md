@@ -11,6 +11,10 @@
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
 
+<br/><br/>
+
+<img src="docs/screenshot.png" alt="Screenshot of the live site" width="100%" />
+
 </div>
 
 ---
